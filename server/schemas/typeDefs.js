@@ -25,6 +25,7 @@ type Course {
   startDate: Date
   endDate: Date
   isCompleted: Boolean
+  projects: [Project]
 }
 
 type Project {
@@ -60,11 +61,11 @@ input ProfileInput {
 type Mutation {
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String! password: String!): Auth
-  addCourse(name: String!, description: String!, startDate: Date, endDate: Date): Subject
+  addCourse(name: String!, description: String!, startDate: Date, endDate: Date): Course
   addProject(name: String!, description: String!, startDate: Date, endDate: Date): Project
   editUser (first_name: String!, last_name: String! profile: ProfileInput): User
   editSubject(courses: [ID]): Subject
-  editCourse(name: String!, description: String!, startDate: Date, endDate: Date, isCompleted: Boolean): Course
+  editCourse(name: String!, description: String!, startDate: Date, endDate: Date, isCompleted: Boolean, projects: [ID]): Course
   editProject(name: String!, description: String!, startDate: Date, endDate: Date, isCompleted: Boolean): Project
   removeCourse(courseId: ID!): Course 
   removeProject(projectId: ID!): Project
