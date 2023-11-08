@@ -28,6 +28,10 @@ const courseSchema = new Schema({
         required: true,
         default: false
     },
+    projects: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Project'
+    }],
 
 });
 
