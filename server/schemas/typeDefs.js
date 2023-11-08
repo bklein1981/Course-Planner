@@ -56,7 +56,7 @@ input ProfileInput {
   biography: String
   skills: [String]
   links: [String]
-  subjects: [Subject]
+  subjects: [ID]
 }
 
 type Mutation {
