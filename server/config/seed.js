@@ -40,44 +40,37 @@ db.once("open", async () => {
     {
       name: "Introduction to Computer Science",
       description: "An introduction to the field of computer science.",
-      isCompleted: false,
       subjects: [subjects[0]._id],
     },
     {
       name: "Full-Stack Web Development",
       description: "A full-stack web development course.",
-      isCompleted: false,
       subjects: [subjects[0]._id],
     },
     {
       name: "Spanish 101",
       description: "An introductory course to the Spanish language.",
-      isCompleted: false,
       subjects: [subjects[1]._id],
     },
     {
       name: "French 101",
       description: "An introductory course to the French language.",
-      isCompleted: false,
       subjects: [subjects[1]._id],
     },
     {
       name: "Drawing for Beginners",
       description: "A course that introduces the basics of drawing.",
-      isCompleted: false,
       subjects: [subjects[2]._id],
     },
     {
       name: "Professional Communication",
       description:
         "A course on effective communication in a professional setting.",
-      isCompleted: false,
       subjects: [subjects[3]._id],
     },
     {
       name: "Introduction to Data Analysis",
       description: "A course that introduces the basics of data analysis.",
-      isCompleted: false,
       subjects: [subjects[4]._id],
     },
   ]);
