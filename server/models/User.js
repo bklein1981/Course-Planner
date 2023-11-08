@@ -32,8 +32,8 @@ const userSchema = new Schema({
       links: [{type: String,}],
       subject: {
         type: Schema.Types.ObjectId,
-        ref: 'Focus"'
-      }
+        ref: 'Subject'
+      },
     } 
   ]
 });
