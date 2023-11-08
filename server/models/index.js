@@ -1,4 +1,6 @@
-// const Tech = require('./Tech');
-// const Matchup = require('./Matchup');
+const Course = require('./Course');
+const Subject = require('./Subject');
+const Project = require('./Project');
+const User = require('./User');
 
-// module.exports = { Tech, Matchup };
+module.exports = { Course, Subject, Project, User };

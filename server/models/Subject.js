@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const { Course } = require("./Course");
 
-const userSchema = new Schema(
+const subjectSchema = new Schema(
   {
     name: {
       type: String,
@@ -26,3 +26,7 @@ const userSchema = new Schema(
     },
   }
 );
+
+const Subject = model('Subject', subjectSchema);
+
+module.exports = Subject;
