@@ -30,10 +30,9 @@ const userSchema = new Schema({
       biography: {type: String},
       skills: [{type: String,}],
       links: [{type: String,}],
-      subject: {
+      subjects: [{
         type: Schema.Types.ObjectId,
         ref: 'Subject'
-      },
     } 
   ]
 });
