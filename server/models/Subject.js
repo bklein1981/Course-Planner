@@ -1,7 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-const { Course } = require("./Course");
-
 const subjectSchema = new Schema(
   {
     name: {
@@ -16,7 +14,7 @@ const subjectSchema = new Schema(
     courses: [
       {
         type: Schema.Types.ObjectId,
-        ref: "course",
+        ref: "Course",
       },
     ],
   },
