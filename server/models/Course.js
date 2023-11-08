@@ -23,11 +23,6 @@ const courseSchema = new Schema({
         type: Date,
         required: false,
     },
-    isCompleted: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
     projects: [{
         type: Schema.Types.ObjectId,
         ref: 'Project'

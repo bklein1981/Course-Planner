@@ -33,7 +33,6 @@ const userSchema = new Schema({
       subjects: [{
         type: Schema.Types.ObjectId,
         ref: 'Subject'
-  }]
     } 
   ]
 });
