@@ -28,7 +28,17 @@ const projectSchema = new Schema({
         required: true,
         default: false
     },
+    courseId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Course',
+        required: true // Add this line
+    },
 
+    userId: { // Add this line
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 });
 
 const Project = model('Project', projectSchema);
