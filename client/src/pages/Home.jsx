@@ -1,16 +1,14 @@
-
+import Subject from "../components/Subject";
 function Home() {
   
     return (
-      <div>
-        <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-        <div>Logo</div>
-        
-        <div>Login or Sign Up Box</div>
-        
-      </div>
+        <div className="flex justify-center pt-4">
+         <div>
+          <Subject />
+          <Subject />
+         </div>
+
+        </div>
     );
   }
   

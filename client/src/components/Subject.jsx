@@ -1,30 +1,23 @@
-// The props variable is an object containing the welcomeClass helper method on the clickHandler property
-function Greeting(props) {
-    const welcomeStudent = () => {
-      alert(`Welcome, ${props.name}!`)
-    }
-  
-    return (
-      <div className="container text-center">
-        <div className="list-group">
-          {/* In React, we can directly attach event listeners to the to the relevant markup */}
-          <button 
-            onClick={props.clickHandler} 
-            className="list-group-item list-group-item-action list-group-item-info" 
-            aria-current="true"
-          >
-            Greet the Students!
-          </button>
-          <button 
-            onClick={welcomeStudent} 
-            className="list-group-item list-group-item-action"
-          >
-            {props.name}
-          </button>
+import Course from "./Course";
+import Project from "./Project";
+
+function Subject() {
+  return (
+    <div className="pt-4 border-2 rounded px-5 pb-5 shadow-md mb-2">
+      <div className="grid grid-rows-1 pb-5 text-center text-5xl font-semibold">Professional Development</div>
+      <div className="grid grid-rows-1">
+        <div className="grid lg:grid-cols-3 grid-cols-1 gap-2">
+          <div>
+            <Course />
+            <Project />
+          </div>
+
+
+
         </div>
       </div>
-    );
-  }
-  
-  export default Greeting;
-  
+    </div>
+  );
+}
+
+export default Subject;
