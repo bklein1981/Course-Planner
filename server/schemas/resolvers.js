@@ -47,17 +47,51 @@ const resolvers = {
       return { token, newUser };
     },
     //addCourse
-    addCourse: async (parent, { name, description, startDate, endDate }) => {
+    addCourse: async (parent, { name, description, startDate, endDate, subjectId, userId }) => {
       const newCourse = await Course.create(
-        { name, description, startDate, endDate }
-        )
+        { name, description, startDate, endDate, subjectId }
+        );
+        console.log(newCourse._id)
+        console.log(subjectId)
+        const subject = await Subject.findOne({_id: subjectId});
+        if (!subject) {
+          // throw new AuthenticationError("Subject not found");
+        }
+        console.log("STRING", subject)
+        console.log(subject.courses)
+        subject.courses.push(newCourse.id);
+        await subject.save();
+        
+        //update user
+        const user = await User.findById({_id: userId})
+        if (!user) {
+          // throw new AuthenticationError("User not found");
+        }
+        user.courses.push(newCourse.id);
+        
         return newCourse
     },
     //addProject
-    addProject: async (parent, { name, description, startDate, endDate }) => {
+    addProject: async (parent, { name, description, startDate, endDate, courseId, userId }) => {
       const newProject = await Project.create(
-        { name, description, startDate, endDate }
-        )
+        { name, description, startDate, endDate, courseId, userId })
+        const course = await Course.findOne({ id: courseId });
+
+        if (!course) {
+          throw new Error("Course not found");
+        }
+
+        course.projects.push(newProject._id);
+        await course.save();
+        
+        const user = await User.findOne({id: userId});
+        
+        if (!user) {
+          throw new AuthenticationError("User not found");
+        } 
+        user.projects.push(newProject._id);
+        await user.save();
+        
         return newProject
     },
     //editUser
