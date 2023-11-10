@@ -4,13 +4,14 @@ type User {
   password: String!
   first_name: String!
   last_name: String!
-  profile: [{
-    biography: String
-    skills: [String]
-    links: [String]
-    subjects: [Subject]
-  }]
-  }]
+  profile: Profile
+}
+
+type Profile {
+  biography: String
+  skills: [String]
+  links: [String]
+  subjects: [Subject]
 }
 
 type Subject {
@@ -22,8 +23,8 @@ type Subject {
 type Course {
   name: String!
   description: String!
-  startDate: Date
-  endDate: Date
+  startDate: String
+  endDate: String
   isCompleted: Boolean
   projects: [Project]
 }
@@ -31,8 +32,8 @@ type Course {
 type Project {
   name: String!
   description: String!
-  startDate: Date
-  endDate: Date
+  startDate: String
+  endDate: String
   isCompleted: Boolean
 }
 
@@ -55,22 +56,22 @@ input ProfileInput {
   biography: String
   skills: [String]
   links: [String]
-  subjects: [Subject]
+  subjects: [ID]
 }
 
 type Mutation {
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String! password: String!): Auth
-  addCourse(name: String!, description: String!, startDate: Date, endDate: Date): Course
-  addProject(name: String!, description: String!, startDate: Date, endDate: Date): Project
-  editUser (first_name: String!, last_name: String! profile: ProfileInput): User
+  addCourse(name: String!, description: String!, startDate: String, endDate: String): Course
+  addProject(name: String!, description: String!, startDate: String, endDate: String): Project
+  editUser (first_name: String!, last_name: String!, profile: ProfileInput): User
   editSubject(courses: [ID]): Subject
-  editCourse(name: String!, description: String!, startDate: Date, endDate: Date, isCompleted: Boolean, projects: [ID]): Course
-  editProject(name: String!, description: String!, startDate: Date, endDate: Date, isCompleted: Boolean): Project
+  editCourse(name: String!, description: String!, startDate: String, endDate: String, isCompleted: Boolean, projects: [ID]): Course
+  editProject(name: String!, description: String!, startDate: String, endDate: String, isCompleted: Boolean): Project
   removeCourse(courseId: ID!): Course 
   removeProject(projectId: ID!): Project
 }
 `
-  ;
+;
 
 module.exports = typeDefs;

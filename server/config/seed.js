@@ -78,8 +78,8 @@ db.once("open", async () => {
   console.log("Courses seeded");
 
   await User.create({
-    firstName: "John",
-    lastName: "Doe",
+    first_name: "John",
+    last_name: "Doe",
     email: "john.doe@testmail.com",
     password: "password12345",
     profile: {
@@ -98,8 +98,8 @@ db.once("open", async () => {
   });
 
   await User.create({
-    firstName: "Jane",
-    lastName: "Doe",
+    first_name: "Jane",
+    last_name: "Doe",
     email: "jane.doe@testmail.com",
     password: "password12345",
     profile: {
