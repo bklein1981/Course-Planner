@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+
 const projectSchema = new Schema({
     name: {
         type: String,
@@ -33,7 +34,6 @@ const projectSchema = new Schema({
         ref: 'Course',
         required: true // Add this line
     },
-
     userId: { // Add this line
         type: Schema.Types.ObjectId,
         ref: 'User',

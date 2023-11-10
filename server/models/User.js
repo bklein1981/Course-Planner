@@ -23,18 +23,36 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
-  profile: [
+  biography: {
+    type: String
+  },
+  skills: [
     {
-      biography: { type: String },
-      skills: [{ type: String }],
-      links: [{ type: String }],
-      subjects: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Subject",
-        },
-      ],
+      type: String
+    }
+  ],
+  links: [
+    { 
+      type: String 
+    }
+  ],
+  subjects: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Subject",
     },
+  ],
+  courses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    }
+  ],
+  projects: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
+    }
   ],
 });
 
