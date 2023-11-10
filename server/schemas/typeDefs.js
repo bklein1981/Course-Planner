@@ -57,7 +57,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String! password: String!): Auth
-  addCourse(name: String!, description: String!, startDate: String, endDate: String): Course
+  addCourse(name: String!, description: String!, startDate: String, endDate: String, subjectId: ID!, userId: ID!): Course
   addProject(name: String!, description: String!, startDate: String, endDate: String): Project
   editUser (userId: ID!, first_name: String!, last_name: String!): User
   editSubject(subjectId: ID!, name: String!, description: String!): Subject

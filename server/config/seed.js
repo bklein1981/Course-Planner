@@ -93,7 +93,8 @@ db.once("open", async () => {
       "MongoDB",
       "React",
     ],
-    subjectId: [subjects[0]._id, subjects[1]._id],
+    subjects: [subjects[0]._id, subjects[1]._id],
+    courses: [courses[0]._id]
   },
     {
       first_name: "Jane",
@@ -102,7 +103,9 @@ db.once("open", async () => {
       password: "password12345",
       biography: "I am an artist.",
       skills: ["Drawing", "Painting", "Sculpting"],
-      subjectId: [subjects[2]._id, subjects[3]._id],
+      subjects: [subjects[2]._id, subjects[3]._id],
+     courses: [courses[4]._id]
+
     }
   ]);
 
