@@ -83,30 +83,26 @@ db.once("open", async () => {
     last_name: "Doe",
     email: "john.doe@testmail.com",
     password: "password12345",
-    profile: {
-      biography: "I am a full-stack web developer.",
-      skills: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "React",
-      ],
-      subjectId: [subjects[0]._id, subjects[1]._id],
-    },
+    biography: "I am a full-stack web developer.",
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "React",
+    ],
+    subjectId: [subjects[0]._id, subjects[1]._id],
   },
     {
       first_name: "Jane",
       last_name: "Doe",
       email: "jane.doe@testmail.com",
       password: "password12345",
-      profile: {
-        biography: "I am an artist.",
-        skills: ["Drawing", "Painting", "Sculpting"],
-        subjectId: [subjects[2]._id, subjects[3]._id],
-      },
+      biography: "I am an artist.",
+      skills: ["Drawing", "Painting", "Sculpting"],
+      subjectId: [subjects[2]._id, subjects[3]._id],
     }
   ]);
 

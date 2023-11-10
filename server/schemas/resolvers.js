@@ -3,23 +3,23 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    user: async (parent, { _id }) => {
-      return await User.findById(_id).populate('subjects')
+    user: async (parent, { userId }) => {
+      return await User.findById({_id: userId}).populate('subjects').populate('courses').populate('projects')
     },
-    subject: async (parent, { _id }) => {
-      return await Subject.findById(_id).populate('courses')
+    subject: async (parent, { subjectId }) => {
+      return await Subject.findById({ _id: subjectId })
     },
     subjects: async () => {
       return await Subject.find().populate('courses')
     },
-    course: async (parent, { _id }) => {
-      return await Course.findById(_id).populate('projects')
+    course: async (parent, { courseId }) => {
+      return await Course.findById({_id: courseId})
     },
     courses: async () => {
       return await Course.find().populate('projects')
     },
-    project: async (parent, { _id }) => {
-      return await Project.findById(_id)
+    project: async (parent, { projectId }) => {
+      return await Project.findById({_id: projectId})
     },
     projects: async () => {
       return await Project.find()
@@ -61,18 +61,19 @@ const resolvers = {
         return newProject
     },
     //editUser
-    editUser: async (parent, {userId, first_name, last_name, profile }) => {
+    editUser: async (parent, {userId, first_name, last_name }) => {
       const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { first_name, last_name, profile },
+        { _id: userId},
+        { first_name, last_name },
         { new: true } 
         )
         return updatedUser
     },
     //editSubject
-    editSubject: async (parent, { subjectId, courses }) => {
+    editSubject: async (parent, { subjectId, courses, name, description }) => {
       const updatedSubject = await Subject.findByIdAndUpdate(
-        subjectId,
+        { _id: subjectId},
+        { name, description},
         { $set: {courses} },
         { new: true}
         )
@@ -81,7 +82,7 @@ const resolvers = {
     //editCourse
     editCourse: async (parent, { courseId, name, description, startDate, endDate, isCompleted, projects }) => {
       const updatedCourse = await Course.findByIdAndUpdate(
-        courseId,
+        { _id: courseId},
         { name, description, startDate, endDate, isCompleted },
         { $set: {projects} },
         { new: true }
@@ -91,7 +92,7 @@ const resolvers = {
     //editProject
     editProject: async (parent, { projectId, name, description, startDate, endDate, isCompleted }) => {
       const updatedProject = await Project.findByIdAndUpdate(
-        projectId,
+        { _id: projectId},
         { name, description, startDate, endDate, isCompleted },
         { new: true }
         )
