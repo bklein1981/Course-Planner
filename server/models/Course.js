@@ -27,7 +27,11 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Project'
     }],
-
+    subjectId: { // Add this line
+        type: Schema.Types.ObjectId,
+        ref: 'Subject',
+        required: true
+    }
 });
 
 const Course = model('Course', courseSchema);
