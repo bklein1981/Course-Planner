@@ -1,5 +1,6 @@
 const typeDefs = `
-type User { 
+type User {
+  _id: ID! 
   email: String!
   password: String!
   first_name: String!
@@ -8,6 +9,7 @@ type User {
 }
 
 type Profile {
+  _id: ID!
   biography: String
   skills: [String]
   links: [String]
@@ -15,12 +17,14 @@ type Profile {
 }
 
 type Subject {
+  _id: ID!
   name: String!
   description: String!
   courses: [Course]
 }
 
 type Course {
+  _id: ID!
   name: String!
   description: String!
   startDate: String
@@ -30,6 +34,7 @@ type Course {
 }
 
 type Project {
+  _id: ID!
   name: String!
   description: String!
   startDate: String
