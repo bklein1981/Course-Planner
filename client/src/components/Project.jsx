@@ -1,30 +1,43 @@
-// The props variable is an object containing the welcomeClass helper method on the clickHandler property
-function Greeting(props) {
-    const welcomeStudent = () => {
-      alert(`Welcome, ${props.name}!`)
-    }
-  
-    return (
-      <div className="container text-center">
-        <div className="list-group">
-          {/* In React, we can directly attach event listeners to the to the relevant markup */}
-          <button 
-            onClick={props.clickHandler} 
-            className="list-group-item list-group-item-action list-group-item-info" 
-            aria-current="true"
-          >
-            Greet the Students!
-          </button>
-          <button 
-            onClick={welcomeStudent} 
-            className="list-group-item list-group-item-action"
-          >
-            {props.name}
-          </button>
-        </div>
+import { Card } from 'flowbite-react';
+
+function Project() {
+  return (
+    <Card className="max-w-sm">
+      <div className="mb-4 flex items-center justify-between">
+        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Current Projects</h5>
+
       </div>
-    );
-  }
-  
-  export default Greeting;
-  
+      <div className="flow-root">
+        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          <li className="py-3 sm:py-4">
+            <div className="flex items-center space-x-4">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Project 1</p>
+                <p className="truncate text-sm text-gray-500 dark:text-gray-400">This is the first project</p>
+              </div>
+            </div>
+          </li>
+          <li className="py-3 sm:py-4">
+            <div className="flex items-center space-x-4">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Project 2</p>
+                <p className="truncate text-sm text-gray-500 dark:text-gray-400">This is the second project</p>
+              </div>
+
+            </div>
+          </li>
+          <li className="py-3 sm:py-4">
+            <div className="flex items-center space-x-4">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Project 3</p>
+                <p className="truncate text-sm text-gray-500 dark:text-gray-400">This is the third project</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </Card>
+  );
+}
+
+export default Project;
