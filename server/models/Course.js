@@ -24,11 +24,7 @@ const courseSchema = new Schema({
         type: Date,
         required: false,
     },
-    projects: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Project'
-    }],
-    subjectId: { // Add this line
+    subject: { // Add this line
         type: Schema.Types.ObjectId,
         ref: 'Subject',
         required: true

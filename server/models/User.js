@@ -23,37 +23,21 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
-  biography: {
-    type: String
-  },
-  skills: [
-    {
-      type: String
-    }
-  ],
-  links: [
-    { 
-      type: String 
-    }
-  ],
-  subjects: [
-    {
+  biography: String,
+  skills: [String],
+  links: [String],
+  subjects: [{
       type: Schema.Types.ObjectId,
       ref: "Subject",
-    },
-  ],
-  courses: [
-    {
+  }],
+  courses: [{
       type: Schema.Types.ObjectId,
       ref: "Course",
-    }
-  ],
-  projects: [
-    {
+  }],
+  projects: [{
       type: Schema.Types.ObjectId,
       ref: "Project",
-    }
-  ],
+  }],
 });
 
 userSchema.pre("save", async function (next) {

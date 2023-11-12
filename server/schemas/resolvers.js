@@ -7,22 +7,22 @@ const resolvers = {
       return await User.findById({_id: userId}).populate('subjects').populate('courses').populate('projects')
     },
     subject: async (parent, { subjectId }) => {
-      return await Subject.findById({ _id: subjectId })
+      return await Subject.findById({ _id: subjectId }).populate('courses')
     },
     subjects: async () => {
       return await Subject.find().populate('courses')
     },
     course: async (parent, { courseId }) => {
-      return await Course.findById({_id: courseId})
+      return await Course.findById({_id: courseId}).populate('subject')
     },
     courses: async () => {
-      return await Course.find().populate('projects')
+      return await Course.find().populate('subject')
     },
     project: async (parent, { projectId }) => {
-      return await Project.findById({_id: projectId})
+      return await Project.findById({_id: projectId}).populate('course').populate('user')
     },
     projects: async () => {
-      return await Project.find()
+      return await Project.find().populate('course').populate('user')
     }
   },
   
@@ -47,13 +47,13 @@ const resolvers = {
       return { token, newUser };
     },
     //addCourse
-    addCourse: async (parent, { name, description, startDate, endDate, subjectId, userId }) => {
+    addCourse: async (parent, { name, description, startDate, endDate, subject, userId }) => {
       const newCourse = await Course.create(
-        { name, description, startDate, endDate, subjectId }
+        { name, description, startDate, endDate, subject }
         );
         console.log(newCourse._id)
-        console.log(subjectId)
-        const subject = await Subject.findOne({_id: subjectId});
+        console.log(subject)
+        const subjectRef = await Subject.findOne({_id: subject._id});
         if (!subject) {
           // throw new AuthenticationError("Subject not found");
         }

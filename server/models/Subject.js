@@ -12,18 +12,11 @@ const subjectSchema = new Schema(
       type: String,
       required: true,
     },
-    courses: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Course",
-      },
-    ],
+    courses: [{
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    }],
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
 );
 
 const Subject = model('Subject', subjectSchema);
