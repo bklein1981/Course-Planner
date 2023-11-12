@@ -74,9 +74,25 @@ db.once("open", async () => {
       subjectId: [subjects[4]._id],
     },
   ]);
-  console.log(courses);
 
   console.log("> courses seeded");
+
+  subjects.map(async (subject) => {
+    await Subject.findOneAndUpdate(
+      {
+        _id: subject._id,
+      },
+      {
+        $push: {
+          courses: courses.filter((course) =>
+            course.subjectId.toString().includes(subject._id)
+          ),
+        },
+      }
+    );
+  });
+
+  console.log("> subjects updated");
 
   const users = await User.insertMany([
     {
@@ -147,5 +163,8 @@ db.once("open", async () => {
       },
     }
   );
+
+  console.log("> users updated");
+  
   process.exit();
 });
