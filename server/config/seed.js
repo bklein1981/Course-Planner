@@ -74,28 +74,29 @@ db.once("open", async () => {
       subjectId: [subjects[4]._id],
     },
   ]);
+  console.log(courses);
 
   console.log("> courses seeded");
 
   const users = await User.insertMany([
-  {
-    first_name: "John",
-    last_name: "Doe",
-    email: "john.doe@testmail.com",
-    password: "password12345",
-    biography: "I am a full-stack web developer.",
-    skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "React",
-    ],
-    subjects: [subjects[0]._id, subjects[1]._id],
-    courses: [courses[0]._id]
-  },
+    {
+      first_name: "John",
+      last_name: "Doe",
+      email: "john.doe@testmail.com",
+      password: "password12345",
+      biography: "I am a full-stack web developer.",
+      skills: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "React",
+      ],
+      subjects: [subjects[0]._id, subjects[1]._id],
+      courses: [courses[0]._id],
+    },
     {
       first_name: "Jane",
       last_name: "Doe",
@@ -104,26 +105,47 @@ db.once("open", async () => {
       biography: "I am an artist.",
       skills: ["Drawing", "Painting", "Sculpting"],
       subjects: [subjects[2]._id, subjects[3]._id],
-     courses: [courses[4]._id]
-
-    }
+      courses: [courses[4]._id],
+    },
   ]);
 
-    console.log("> users seeded");
+  console.log("> users seeded");
 
-  await Project.create({
-    name: "Portfolio Website",
-    description: "This is a portfolio website.",
-    courseId: courses[0]._id,
-    userId: users[0]._id,
-  },
-  {
-    name: "Simple Essay",
-    description: "This is an essay in Spanish",
-    courseId: courses[2]._id,
-    userId: users[1]._id,
-  });
+  const projects = await Project.insertMany([
+    {
+      name: "Portfolio Website",
+      description: "This is a portfolio website.",
+      courseId: courses[0]._id,
+      userId: users[0]._id,
+    },
+    {
+      name: "Simple Essay",
+      description: "This is an essay in Spanish",
+      courseId: courses[2]._id,
+      userId: users[1]._id,
+    },
+  ]);
   console.log("> projects seeded");
 
+  await User.findOneAndUpdate(
+    {
+      _id: users[0]._id,
+    },
+    {
+      $push: {
+        projects: projects[0]._id,
+      },
+    }
+  );
+  await User.findOneAndUpdate(
+    {
+      _id: users[1]._id,
+    },
+    {
+      $push: {
+        projects: projects[1]._id,
+      },
+    }
+  );
   process.exit();
 });
