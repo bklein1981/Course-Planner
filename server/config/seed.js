@@ -3,10 +3,10 @@ const { User, Course, Project, Subject } = require("../models");
 const cleanDB = require("./cleanDB");
 
 db.once("open", async () => {
-  await cleanDB("User", "users");
-  await cleanDB("Course", "courses");
-  await cleanDB("Project", "projects");
   await cleanDB("Subject", "subjects");
+  await cleanDB("Course", "courses");
+  await cleanDB("User", "users");
+  await cleanDB("Project", "projects");
 
   const subjects = await Subject.insertMany([
     {
@@ -112,10 +112,16 @@ db.once("open", async () => {
     console.log("> users seeded");
 
   await Project.create({
-    name: "Project 1",
-    description: "This is the first project.",
-    courseId: [courses[0]._id],
-    userId: [users[0]._id],
+    name: "Portfolio Website",
+    description: "This is a portfolio website.",
+    courseId: courses[0]._id,
+    userId: users[0]._id,
+  },
+  {
+    name: "Simple Essay",
+    description: "This is an essay in Spanish",
+    courseId: courses[2]._id,
+    userId: users[1]._id,
   });
   console.log("> projects seeded");
 
