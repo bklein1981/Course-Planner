@@ -40,38 +40,38 @@ db.once("open", async () => {
     {
       name: "Introduction to Computer Science",
       description: "An introduction to the field of computer science.",
-      subjectId: [subjects[0]._id],
+      subject: [subjects[0]._id],
     },
     {
       name: "Full-Stack Web Development",
       description: "A full-stack web development course.",
-      subjectId: [subjects[0]._id],
+      subject: [subjects[0]._id],
     },
     {
       name: "Spanish 101",
       description: "An introductory course to the Spanish language.",
-      subjectId: [subjects[1]._id],
+      subject: [subjects[1]._id],
     },
     {
       name: "French 101",
       description: "An introductory course to the French language.",
-      subjectId: [subjects[1]._id],
+      subject: [subjects[1]._id],
     },
     {
       name: "Drawing for Beginners",
       description: "A course that introduces the basics of drawing.",
-      subjectId: [subjects[2]._id],
+      subject: [subjects[2]._id],
     },
     {
       name: "Professional Communication",
       description:
         "A course on effective communication in a professional setting.",
-      subjectId: [subjects[3]._id],
+      subject: [subjects[3]._id],
     },
     {
       name: "Introduction to Data Analysis",
       description: "A course that introduces the basics of data analysis.",
-      subjectId: [subjects[4]._id],
+      subject: [subjects[4]._id],
     },
   ]);
 
@@ -85,7 +85,7 @@ db.once("open", async () => {
       {
         $push: {
           courses: courses.filter((course) =>
-            course.subjectId.toString().includes(subject._id)
+            course.subject.toString().includes(subject._id)
           ),
         },
       }
@@ -131,14 +131,14 @@ db.once("open", async () => {
     {
       name: "Portfolio Website",
       description: "This is a portfolio website.",
-      courseId: courses[0]._id,
-      userId: users[0]._id,
+      course: courses[0]._id,
+      user: users[0]._id,
     },
     {
       name: "Simple Essay",
       description: "This is an essay in Spanish",
-      courseId: courses[2]._id,
-      userId: users[1]._id,
+      course: courses[2]._id,
+      user: users[1]._id,
     },
   ]);
   console.log("> projects seeded");
@@ -165,6 +165,6 @@ db.once("open", async () => {
   );
 
   console.log("> users updated");
-  
+
   process.exit();
 });

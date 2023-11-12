@@ -27,7 +27,7 @@ type Course {
   startDate: String
   endDate: String
   isCompleted: Boolean
-  projects: [Project]
+  subject: Subject!
 }
 
 type Project {
@@ -37,6 +37,8 @@ type Project {
   startDate: String
   endDate: String
   isCompleted: Boolean
+  course: Course!
+  user: User!
 }
 
 type Auth {

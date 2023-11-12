@@ -29,12 +29,12 @@ const projectSchema = new Schema({
         required: true,
         default: false
     },
-    courseId: {
+    course: {
         type: Schema.Types.ObjectId,
         ref: 'Course',
         required: true 
     },
-    userId: { 
+    user: { 
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true

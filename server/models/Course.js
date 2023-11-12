@@ -24,7 +24,7 @@ const courseSchema = new Schema({
         type: Date,
         required: false,
     },
-    subjectId: { // Add this line
+    subject: { // Add this line
         type: Schema.Types.ObjectId,
         ref: 'Subject',
         required: true
