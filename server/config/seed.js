@@ -34,7 +34,7 @@ db.once("open", async () => {
     },
   ]);
 
-  console.log("Subjects seeded");
+  console.log("> subjects seeded");
 
   const courses = await Course.insertMany([
     {
@@ -75,7 +75,7 @@ db.once("open", async () => {
     },
   ]);
 
-  console.log("Courses seeded");
+  console.log("> courses seeded");
 
   const users = await User.insertMany([
   {
@@ -109,7 +109,7 @@ db.once("open", async () => {
     }
   ]);
 
-    console.log("Users seeded");
+    console.log("> users seeded");
 
   await Project.create({
     name: "Project 1",
@@ -117,7 +117,7 @@ db.once("open", async () => {
     courseId: [courses[0]._id],
     userId: [users[0]._id],
   });
-  console.log("Projects seeded");
+  console.log("> projects seeded");
 
   process.exit();
 });
