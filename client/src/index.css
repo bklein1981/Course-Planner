@@ -1,3 +1,99 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.add-button {
+  max-width: 50px;
+}
+
+.add-button:hover {
+  transform: rotate(25deg);
+}
+
+.bio-div {
+  background-color: #fff;
+  margin: 0 200px;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
+
+.delete-button {
+  max-width: 25px;
+}
+
+.edit-button {
+  max-width: 30px;
+
+}
+
+.home-div {
+  margin: 250px 0 0;
+}
+
+.subject-box {
+  min-width: 1212px;
+  min-height: 400px 
+}
+
+#add-subject-btn {
+  color: #6B7280;
+  box-shadow: 0px 3px 2px #46484D;
+}
+
+#add-subject-btn:active {
+  border: 1px solid;
+  box-shadow: 0px 0px;
+  transform: translateY(3px)
+}
+
+#logout-button {
+  background: #fff;
+  color: #6B7280;
+  box-shadow: 0px 3px 1px;
+}
+
+#logout-button:active {
+  border: 1px solid;
+  box-shadow: 0px 0px 1px;
+  transform: translateY(3px);
+}
+
+#new-course-btn {
+  color: #6B7280;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 25px 20px;
+  width: 100%;
+  box-shadow: 0px 3px 2px #46484D;
+}
+
+#new-course-btn:active {
+  margin: 0 0 2px;
+  border: 1px solid;
+  box-shadow: 0px 4px 1px #fff;
+  transform: translateY(3px);
+}
+
+@media screen and (max-width: 768px) {
+  .bio-div {
+    margin: 0px;
+    padding: 10px;
+  }
+
+  .bio-list {
+    display: none;
+  }
+
+  .home-div {
+    margin: 210px 0 0;
+  }
+
+  .subject-box{
+    min-width: 0px;
+    min-height: 0px 
+  }
+
+  #add-subject-btn {
+    margin: 10px
+  }
+}
