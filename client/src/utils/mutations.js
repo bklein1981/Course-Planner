@@ -6,58 +6,36 @@ export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         token
-        user:{
+        user {
             _id
             email
-            password
             first_name
             last_name
             biography
             skills
             links
-            subjects {
-                name
-            }
-            courses {
-                name
-            }
-            projects {
-                name
-            }
         }
+      }
   }
 `;
 
 export const ADD_USER = gql`
   mutation addUser($first_name: String!, $last_name:String!, $email: String! $password: String!) {
-    addSkill(first_name: $first_name, last_name:$last_name, email: $email, password: $password) {
+    addUser(first_name: $first_name, last_name:$last_name, email: $email, password: $password) {
         token
-        user:{
+        user {
             _id
-            email
-            password
+            email  
             first_name
             last_name
-            biography
-            skills
-            links
-            subjects {
-                name
-            }
-            courses {
-                name
-            }
-            projects {
-                name
-            }
-        }
-    }
+          }
+      }
   }
 `;
 
 export const ADD_COURSE = gql`
   mutation addCourse($name: String!, $description: String!, $startDate: String, $endDate: String, $subject: ID!) {
-    addProfile(name: $name, description: $description, startDate: $startDate, endDate: $endDate, subject: $subject) {
+    addCourse(name: $name, description: $description, startDate: $startDate, endDate: $endDate, subject: $subject) {
       _id
       name
       description
@@ -73,7 +51,7 @@ export const ADD_COURSE = gql`
 
 export const ADD_PROJECT = gql`
   mutation addProject($name: String!, $description: String!, $startDate: String, $endDate: String, $isCompleted: Boolean, $course: ID!, $user: ID!) {
-    addProfile(name: $name, description: $description!, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted, course: $course, user: $user) {
+    addProject(name: $name, description: $description, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted, course: $course, user: $user) {
       _id
       name
       description
@@ -92,9 +70,9 @@ export const ADD_PROJECT = gql`
 
 export const ADD_COURSE_TO_USER = gql`
   mutation addCourseToUser($userId: ID!, $courseId: ID!) {
-    addCourseToUser(userId: $userId, userId: $courseId {
+    addCourseToUser(userId: $userId, userId: $courseId) {
       _id
-      courses{
+      courses {
         _id
         name
         description
@@ -179,7 +157,7 @@ mutation removeCourse($courseId: ID!) {
 `;
 
 export const REMOVE_PROJECT = gql`
-mutation removeProject($projectId: ID!)
+mutation removeProject($projectId: ID!) {
   removeProject(projectId: $projectId) {
     _id
   }

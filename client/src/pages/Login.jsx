@@ -2,6 +2,7 @@ import { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 function Login() {
+  const [userFormData, setUserFormData] = useState("home");
   const [page, setPage] = useState("home");
 
   const handleInputChange = (event) => {

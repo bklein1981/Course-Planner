@@ -32,21 +32,24 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError("Email not found")
+        throw new AuthenticationError;
+        // ("Email not found")
       }
       const correctPw = await user.isCorrectPassword(password);
       
       if (!correctPw) {
-        throw new AuthenticationError("Password not found");
+        throw new AuthenticationError;
+        // ("Password not found")
       }
       const token = signToken(user)
       return { token, user }
     },
     //addUser
     addUser: async (parent, { email, password, first_name, last_name}) => {
-      const newUser = await User.create({email, password, first_name, last_name })
-      const token = signToken(newUser)
-      return { token, newUser };
+      const user = await User.create({email, password, first_name, last_name })
+      console.log(user)
+      const token = signToken(user)
+      return { token, user };
     },
     //addCourse
     addCourse: async (parent, { name, description, startDate, endDate, subject }) => {
