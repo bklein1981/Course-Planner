@@ -47,29 +47,29 @@ const resolvers = {
       return { token, newUser };
     },
     //addCourse
-    addCourse: async (parent, { name, description, startDate, endDate, subject, userId }) => {
-      const newCourse = await Course.create(
-        { name, description, startDate, endDate, subject }
-        );
-        console.log(newCourse._id)
-        console.log(subject)
-        const subjectRef = await Subject.findOne({_id: subject._id});
-        if (!subject) {
-          // throw new AuthenticationError("Subject not found");
-        }
-        console.log("STRING", subject)
-        console.log(subject.courses)
-        subject.courses.push(newCourse.id);
-        await subject.save();
+    addCourse: async (parent, { name, description, startDate, endDate, subject }) => {
+      try {
+        const subjectRef = await Subject.findById(subject);
         
-        //update user
-        const user = await User.findById({_id: userId})
-        if (!user) {
-          // throw new AuthenticationError("User not found");
+        if (!subjectRef) {
+          throw new Error("Subject not found");
         }
-        user.courses.push(newCourse.id);
-        
-        return newCourse
+  
+        const newCourse = await Course.create({
+          name,
+          description,
+          startDate,
+          endDate,
+          subject: subjectRef._id,
+        });
+  
+        subjectRef.courses.push(newCourse._id);
+        await subjectRef.save();
+  
+        return newCourse;
+      } catch (error) {
+        throw new Error(`Error adding course: ${error.message}`);
+      }
     },
     //addProject
     addProject: async (parent, { name, description, startDate, endDate, courseId, userId }) => {
