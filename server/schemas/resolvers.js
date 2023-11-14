@@ -72,27 +72,41 @@ const resolvers = {
       }
     },
     //addProject
-    addProject: async (parent, { name, description, startDate, endDate, courseId, userId }) => {
-      const newProject = await Project.create(
-        { name, description, startDate, endDate, courseId, userId })
-        const course = await Course.findOne({ id: courseId });
-
-        if (!course) {
+    addProject: async (parent, { name, description, startDate, endDate, isCompleted, course, user }) => {
+      try {
+        // Check if the course exists
+        const courseRef = await Course.findById(course);
+        if (!courseRef) {
           throw new Error("Course not found");
         }
-
-        course.projects.push(newProject._id);
-        await course.save();
-        
-        const user = await User.findOne({id: userId});
-        
-        if (!user) {
-          throw new AuthenticationError("User not found");
-        } 
-        user.projects.push(newProject._id);
-        await user.save();
-        
-        return newProject
+  
+        // Check if the user exists
+        const userRef = await User.findById(user);
+        if (!userRef) {
+          throw new Error("User not found");
+        }
+  
+        // Create a new project
+        const newProject = await Project.create({
+          name,
+          description,
+          startDate,
+          endDate,
+          isCompleted,
+          course: courseRef._id,
+          user: userRef._id,
+        });
+  
+        // Update references in the  user
+        userRef.projects.push(newProject._id);
+  
+        // Save changes to the database
+        await userRef.save();
+  
+        return newProject;
+      } catch (error) {
+        throw new Error(`Error adding project: ${error.message}`);
+      }
     },
     //editUser
     editUser: async (parent, {userId, first_name, last_name }) => {
