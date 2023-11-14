@@ -1,6 +1,7 @@
 const db = require("./connection");
 const { User, Course, Project, Subject } = require("../models");
 const cleanDB = require("./cleanDB");
+const bcrypt = require("bcrypt");
 
 db.once("open", async () => {
   await cleanDB("Subject", "subjects");
@@ -94,12 +95,14 @@ db.once("open", async () => {
 
   console.log("> subjects updated");
 
+  const hashedPassword = await bcrypt.hash("password12345", 10);
+
   const users = await User.insertMany([
     {
       first_name: "John",
       last_name: "Doe",
       email: "john.doe@testmail.com",
-      password: "password12345",
+      password: hashedPassword,
       biography: "I am a full-stack web developer.",
       skills: [
         "HTML",
@@ -117,7 +120,7 @@ db.once("open", async () => {
       first_name: "Jane",
       last_name: "Doe",
       email: "jane.doe@testmail.com",
-      password: "password12345",
+      password: hashedPassword,
       biography: "I am an artist.",
       skills: ["Drawing", "Painting", "Sculpting"],
       subjects: [subjects[2]._id, subjects[3]._id],
