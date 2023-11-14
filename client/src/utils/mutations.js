@@ -76,67 +76,112 @@ export const ADD_PROJECT = gql`
     addProfile(name: $name, description: $description!, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted, course: $course, user: $user) {
       _id
       name
-      skills
+      description
+      startDate
+      endDate
+      isCompleted
+      course{
+        id
+      }
+      user{
+        id
+      }
     }
   }
 `;
 
-export const EDIT_USER = gql`
-  mutation addProfile($name: String!) {
-    addProfile(name: $name) {
+export const ADD_COURSE_TO_USER = gql`
+  mutation addCourseToUser($userId: ID!, $courseId: ID!) {
+    addCourseToUser(userId: $userId, userId: $courseId {
       _id
-      name
-      skills
+      courses{
+        _id
+        name
+        description
+      }
     }
   }
 `;
 
-export const EDIT_SUBJECT = gql`
-  mutation addProfile($name: String!) {
-    addProfile(name: $name) {
+export const REMOVE_COURSE_FROM_USER = gql`
+  mutation removeCourseFromUser($userId: ID!, $courseId: ID!) {
+    removeCourseFromUser(userId: $userId, courseId: $courseId) {
+      _id
+        courses{
+          _id
+          name
+          description
+        }
+    }
+  }
+`;
+
+export const ADD_SUBJECT_TO_USER = gql`
+mutation addSubjectToUser($userId: ID!, $subjectId: ID!){
+  addSubjectToUser(userId: $userId, subjectId: $subjectId) {
+    _id
+    email
+    subjects {
       _id
       name
-      skills
+    }
+  }
+}
+`;
+
+export const REMOVE_SUBJECT_FROM_USER = gql`
+  mutation RemoveCourseFromUser($userId: ID!, $subjectId: ID!) {
+    removeCourseFromUser(userId: $userId, subjectId: $subjectId) {  
+      _id
+      subjects {
+        _id
+        name
+      }
     }
   }
 `;
 
 export const EDIT_COURSE = gql`
-  mutation addProfile($name: String!) {
-    addProfile(name: $name) {
+  mutation EditCourse($courseId: ID!, $name: String!, $description: String!, $startDate: String, $endDate: String, $isCompleted: Boolean, $subject: ID!) {
+    editCourse(courseId: $courseId, name: $name, description: $description, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted, subject: $subject) {
       _id
       name
-      skills
+      description
+      startDate
+      endDate
+      isCompleted
+      subject {
+        name
+      }
     }
   }
 `;
 
-export const EDIT_PROJECT = gql`
-  mutation addProfile($name: String!) {
-    addProfile(name: $name) {
+export const EDIT_PROFILE = gql`
+  mutation EditProfile($userId: ID!, $first_name: String, $last_name: String, $biography: String, $skills: [String], $links: [String]) {
+    editProfile(userId: $userId, first_name: $first_name, last_name: $last_name, biography: $biography, skills: $skills, links: $links) {
       _id
-      name
+      first_name
+      last_name
+      biography
       skills
+      links
     }
   }
 `;
 
 export const REMOVE_COURSE = gql`
-  mutation addProfile($name: String!) {
-    addProfile(name: $name) {
-      _id
-      name
-      skills
-    }
+mutation removeCourse($courseId: ID!) {
+  removeCourse(courseId: $courseId) {
+    _id
   }
+}
 `;
 
 export const REMOVE_PROJECT = gql`
-  mutation addProfile($name: String!) {
-    addProfile(name: $name) {
-      _id
-      name
-      skills
-    }
+mutation removeProject($projectId: ID!)
+  removeProject(projectId: $projectId) {
+    _id
   }
+}
 `;

@@ -61,12 +61,12 @@ type Mutation {
   addUser(first_name: String!, last_name:String!, email: String! password: String!): Auth
   addCourse(name: String!, description: String!, startDate: String, endDate: String, subject: ID!): Course
   addProject(name: String!, description: String!, startDate: String, endDate: String, isCompleted: Boolean, course: ID!, user: ID!): Project
-  editProfile (userId: ID! first_name: String last_name: String biography: String skills: [String] links: [String]): User
+  editProfile (userId: ID!, first_name: String, last_name: String, biography: String, skills: [String], links: [String]): User
   addCourseToUser(userId: ID!, courseId: ID!): User
   removeCourseFromUser(userId: ID! courseId: ID!): User
   addSubjectToUser(userId: ID!, subjectId: ID!): User
-  removeSubjectFromUser(userId: ID! subjectId: ID!): User
-  editCourse(courseId: ID! name: String!, description: String!, startDate: String, endDate: String, projects: [ID]): Course
+  removeSubjectFromUser(userId: ID!, subjectId: ID!): User
+  editCourse(courseId: ID!, name: String!, description: String!, startDate: String, endDate: String, projects: [ID]): Course
   editProject(projectId: ID!, name: String!, description: String!, startDate: String, endDate: String, isCompleted: Boolean): Project
   removeCourse(courseId: ID!): Course 
   removeProject(projectId: ID!): Project
