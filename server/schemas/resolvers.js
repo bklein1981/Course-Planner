@@ -35,8 +35,8 @@ const resolvers = {
         throw new AuthenticationError("Email not found")
       }
       const correctPw = await user.isCorrectPassword(password);
-      console.log(correctPw)
-      if (correctPw) {
+      
+      if (!correctPw) {
         throw new AuthenticationError("Password not found");
       }
       const token = signToken(user)
