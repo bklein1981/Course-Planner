@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Sarabun', sans-serif;
+}
+
 .add-button {
   max-width: 50px;
 }
 
-.add-button:hover {
+.add-button:active {
   transform: rotate(25deg);
 }
 
@@ -17,13 +21,36 @@
   border-radius: 0.5rem;
 }
 
-.delete-button {
+.delete-button-img {
   max-width: 25px;
+  padding: 0 0 8px;
+}
+.delete-subj-img{
+  padding: 8px 0 0px;
 }
 
-.edit-button {
-  max-width: 30px;
+.delete-subj-img:active{
+  padding: 0 0 8px
+}
 
+.delete-button-img:active {
+  padding: 0px
+}
+
+.edit-button-img {
+  max-width: 30px;
+  padding: 0 0 8px;
+}
+.edit-button-img:active {
+  padding: 0px;
+}
+
+.edit-subj-img{
+  padding: 8px 0 0px;
+}
+
+.edit-subj-img:active{
+  padding: 0 0 8px
 }
 
 .home-div {
@@ -44,6 +71,10 @@
   border: 1px solid;
   box-shadow: 0px 0px;
   transform: translateY(3px)
+}
+
+#edit-subject-btn{
+  height: 32px;
 }
 
 #logout-button {
