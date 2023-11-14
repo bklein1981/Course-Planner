@@ -1,4 +1,6 @@
 import Subject from "../components/Subject";
+import Auth from '../utils/auth.js'
+
 function Home() {
   
     return (

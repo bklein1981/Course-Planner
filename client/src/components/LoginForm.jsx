@@ -8,6 +8,7 @@ function LoginForm({changePage}) {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
+    setUserFormData('');
   };
 
   function switchSignUp(e) {
@@ -21,12 +22,12 @@ function LoginForm({changePage}) {
     {/* <!-- Username Input --> */}
     <div className="mb-4">
       <label htmlFor="username" className="block text-gray-600">Email</label>
-      <input type="text" placeholder='Your email' name="email" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off"/>
+      <input type="text" placeholder='Your email' name="email" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" onChange={handleInputChange} autocomplete="off"/>
     </div>
     {/* <!-- Password Input --> */}
     <div className="mb-4">
       <label htmlFor="password" className="block text-gray-600">Password</label>
-      <input type="password" placeholder='Your email' name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off"/>
+      <input type="password" placeholder='Your email' name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" onChange={handleInputChange} autocomplete="off"/>
     </div>
     {/* <!-- Login Button --> */}
     <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
