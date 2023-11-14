@@ -110,30 +110,122 @@ const resolvers = {
         throw new Error(`Error adding project: ${error.message}`);
       }
     },
-    //editUser
-    editUser: async (parent, {userId, first_name, last_name }) => {
-      const updatedUser = await User.findByIdAndUpdate(
-        { _id: userId},
-        { first_name, last_name },
-        { new: true } 
-        )
-        return updatedUser
+    //editProfile
+    editProfile: async (parent, { userId, first_name, last_name, biography, skills, links, subjects}) => {
+      try {
+        const updatedFields = {
+          first_name,
+          last_name,
+          biography,
+          skills,
+          links,
+        };
+  
+        // Filter out undefined or null values to update only provided fields
+        Object.keys(updatedFields).forEach((key) => updatedFields[key] === undefined && delete updatedFields[key]);
+  
+        const updatedUser = await User.findByIdAndUpdate(
+          userId,
+          updatedFields,
+          { new: true }
+        );
+  
+        return updatedUser;
+      } catch (error) {
+        throw new Error(`Error editing user: ${error.message}`);
+      }
     },
-    //editSubject
-    editSubject: async (parent, { subjectId, courses, name, description }) => {
-      const updatedSubject = await Subject.findByIdAndUpdate(
-        { _id: subjectId},
-        { name, description},
-        { $set: {courses} },
-        { new: true}
-        )
-        return updatedSubject
+    //addSubjectToUser
+    addSubjectToUser: async (parent, { userId, subjectId }) => {
+      try { 
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error("User not found");
+        }
+        const subject = await Subject.findById(subjectId);
+        if (!subject) {
+          throw new Error("Subject not found");
+        }
+        if (user.subjects.includes(subjectId)) {
+          throw new Error("Subject already added");
+        }
+        user.subjects.push(subjectId);
+        await user.save();
+        return user;
+      } catch (error) {
+        throw new Error(`Error adding subject to user: ${error.message}`);
+      }
     },
-    //editCourse
-    editCourse: async (parent, { courseId, name, description, startDate, endDate, isCompleted, projects }) => {
+
+    removeSubjectFromUser: async (parent, { userId, subjectId }) => {
+      try {
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error("User not found");
+        }
+        const subject = await Subject.findById(subjectId);
+
+        if (!subject) {
+          throw new Error("Subject not found");
+        }
+        if (!user.subjects.includes(subjectId)) {
+          throw new Error("Subject not found in user");
+        }
+        user.subjects.pull(subjectId);
+        await user.save();
+        return user;
+      } catch (error) {
+        throw new Error(`Error removing subject from user: ${error.message}`);
+      }
+    },
+      //addCourseToUser
+    addCourseToUser: async (parent, { userId, courseId }) => {
+      try {
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        const course = await Course.findById(courseId);
+        if (!course) {
+          throw new Error("Course not found");
+        }
+
+        if (user.courses.includes(courseId)) {
+          throw new Error("Course already added");
+        }
+        user.courses.push(courseId);
+        await user.save();
+        return user;
+      } catch (error) {
+        throw new Error(`Error adding course to user: ${error.message}`);
+        }
+      },
+    //removeCourseFromUser
+    removeCourseFromUser: async (parent, { userId, courseId }) => {
+      try {
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error("User not found");
+        }
+        const course = await Course.findById(courseId);
+        if (!course) {
+          throw new Error("Course not found");
+        }
+        if (!user.courses.includes(courseId)) {
+          throw new Error("Course not found in user");
+        }
+        user.courses.pull(courseId);
+        await user.save();
+        return user;
+      } catch (error) {
+        throw new Error(`Error removing course from user: ${error.message}`);
+      }
+    },
+    editCourse: async (parent, { courseId, name, description, startDate, endDate, projects }) => {
       const updatedCourse = await Course.findByIdAndUpdate(
         { _id: courseId},
-        { name, description, startDate, endDate, isCompleted },
+        { name, description, startDate, endDate },
         { $set: {projects} },
         { new: true }
         )
