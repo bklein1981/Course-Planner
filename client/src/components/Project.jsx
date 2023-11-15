@@ -32,21 +32,21 @@ function Project() {
             <div className="flex items-center space-x-4">
               <div className="min-w-0 flex-1">
                 <div className='grid grid-cols-12'>
-                  <div className="col-span-9 truncate text-md font-medium text-gray-900 dark:text-white">Project 1</div>
+                  <div className="col-span-9 truncate text-md font-medium text-gray-900 dark:text-white">placeholder</div>
                   <EditProject isOpen={openEditModal} onCloseModal={() => setEditModal(false)} />
                   <button className='col-span-2 lg:justify-self-center' aria-label="edit" onClick={edithandleClickEvent}><img className='edit-button-img' src={editIcon} alt="edit button" /></button>
                   <button aria-label="delete"><img className='delete-button-img' src={deleteIcon} alt="delete button" /></button>
                 </div>
-                <div className="truncate text-sm text-gray-500 dark:text-gray-400">This is the first project</div>
+                <div className="truncate text-sm text-gray-500 dark:text-gray-400">placeholder</div>
               </div>
             </div>
             <div className="grid grid-cols-6 pt-3">
               <div className="col-span-2 text-md font-medium text-gray-900">Start Date:</div>
-              <div className="col-span-2 text-md font-medium text-gray-500">11/11/23</div>
+              <div className="col-span-2 text-md font-medium text-gray-500">placeholder</div>
             </div>
             <div className="grid grid-cols-6 pt-3">
               <div className="col-span-2 text-md font-medium text-gray-900">End Date:</div>
-              <div className="col-span-2 text-md font-medium text-gray-500">11/11/23</div>
+              <div className="col-span-2 text-md font-medium text-gray-500">placeholder</div>
             </div>
           </li>
 
