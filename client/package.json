@@ -16,7 +16,8 @@
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "tailwind-datepicker-react": "^1.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

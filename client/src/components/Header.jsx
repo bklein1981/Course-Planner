@@ -1,11 +1,25 @@
+import AddSubject from "./AddSubject";
+import { useState } from "react";
+import Auth from "../utils/auth";
+
 function Header() {
+  
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  }
+
+  const[openModal, setOpenModal] = useState(false);
+  
+  const handleClickEvent = () => {
+    setOpenModal(true) }
 
   return (
     <div className="fixed top-0 left-0 right-0">
       <div className="flex flex-row flex-wrap pb-4 bg-slate-200 pt-4 ">
         <div className="flex lg:basis-2/3 basis-full text-4xl justify-center lg:justify-end lg:pe-20">My Course Planner</div>
         <div className="flex lg:basis-1/3 basis-full justify-center lg:justify-end pt-5 pb-3 lg:pt-0 lg:pb-0 lg:pr-10">
-          <button className="border rounded px-4" id="logout-button" aria-label="logout" alt="Logout Button">Logout</button>
+          <button className="border rounded px-4" id="logout-button" aria-label="logout" alt="Logout Button" onClick={logout}>Logout</button>
         </div>
       </div>
 
@@ -27,7 +41,8 @@ function Header() {
           </div>
         </div>
         <div className="flex justify-center col-span-12 lg:col-span-1">
-          <button className="my-10 px-4 border rounded" id="add-subject-btn" aria-label="add a subject" alt="Add a Subject">Add a Subject</button>
+          <AddSubject isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
+          <button className="my-10 px-4 border rounded" id="add-subject-btn" aria-label="add a subject" alt="Add a Subject" onClick={handleClickEvent}>Add a Subject</button>
         </div>
       </div>
     </div>
