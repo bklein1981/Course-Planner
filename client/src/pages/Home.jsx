@@ -82,7 +82,7 @@ function Home() {
                     <Header user={user} />
                 </div>
                 <div id="main-content" style={mainStyle}>
-                    <Subject />
+                    <Subject user={user} />
                 </div>
             </div>
         </div>
