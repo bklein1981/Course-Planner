@@ -1,10 +1,11 @@
-import Header from "./components/Header.jsx";
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Footer from "./components/Footer.jsx";
 import Auth from "./utils/auth.js";
+import { Outlet } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -30,7 +31,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      {Auth.loggedIn() ? <Home></Home> : <Login></Login>}
+      <Outlet />
+      <Footer />
+      {/* {Auth.loggedIn() ? <Home></Home> : <Login></Login>} */}
     </ApolloProvider>
   );
 }
