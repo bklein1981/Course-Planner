@@ -16,7 +16,7 @@ body {
 
 .bio-div {
   background-color: #fff;
-  margin: 0 200px;
+  margin: 0 10px;
   padding: 10px;
   border-radius: 0.5rem;
 }
@@ -38,11 +38,10 @@ body {
 }
 
 .edit-button-img {
-  max-width: 30px;
-  padding: 0 0 8px;
+  padding: 8px 0 0px;
 }
 .edit-button-img:active {
-  padding: 0px;
+  padding: 0 0 8px;
 }
 
 .edit-subj-img{
@@ -76,7 +75,6 @@ body {
 }
 #edit-profile-btn {
   margin: 25% 0;
-  height: 34px;
   color: #6B7280;
   box-shadow: 0px 3px 2px #46484D;
 }
@@ -139,9 +137,15 @@ body {
     display: none;
   }
 
-  .edit-profile {
+  #edit-profile-btn {
     display: none;
   }
+
+  #add-subject-btn {
+    margin: 10px;
+    align-self: center;
+  }
+
   .home-div {
     margin: 210px 0 0;
   }

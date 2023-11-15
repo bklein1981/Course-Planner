@@ -4,8 +4,42 @@ import { useState, useEffect } from "react";
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries'
+
 function Home() {
     const [headerHeight, setHeaderHeight] = useState(0);
+
+    const [userId, setUserId] = useState(null); // State to store user id
+    const [user, setUserData] = useState({}); // State to store user data returned from the query
+
+    const { loading, data, error, refetch } = useQuery(QUERY_USER, {
+      variables: { id: userId },
+      skip: !userId,
+    });
+  
+    useEffect(() => {
+      // Fetch the userId using Auth
+      const loggedInUserId = Auth.getProfile()?.data?._id;
+      if (loggedInUserId) {
+        setUserId(loggedInUserId);
+      }
+    }, []);
+  
+  
+    useEffect(() => {
+      if (userId) {
+        // Trigger the query when userId changes
+        refetch({ userId }); // Re-fetch the user data with the updated userId
+      }
+    }, [userId, refetch]);
+  
+    useEffect(() => {
+      if (userId && data) {
+        console.log("User Data:", data);
+        const userData = data.user || {};
+        console.log("User:", userData); // Log the user object
+        setUserData(userData); // Set the user data in state
+      }
+    }, [loading, data]);
 
     useEffect(() => {
         const updateHeaderHeight = () => {
@@ -60,8 +94,8 @@ function Home() {
     return (
         <div className="flex justify-center">
             <div>
-                <div className="fixed top-0 left-0 right-0" id="header-content">
-                    <Header />
+                <div className="fixed top-0 left-0 right-0 w-full sm:w-auto" id="header-content">
+                    <Header user={user} />
                 </div>
                 <div id="main-content" style={mainStyle}>
                     {subjectData.map((subject, index) => {
