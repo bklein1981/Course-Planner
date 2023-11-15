@@ -5,25 +5,37 @@ export const QUERY_USER = gql`
     user(userId: $userId) {
         _id
         email
-        password
         first_name
         last_name
         biography
         skills
         links
         subjects {
+            _id
             name
             description
+            courses {
+              _id
+            }
         }
         courses {
+            _id
             name
             description
+            startDate
+            endDate
+            subject{
+              _id
+            }
         }
         projects {
             name
             description
             startDate
             endDate
+            course{
+              _id
+            }
         }
   }
 }`;
@@ -47,7 +59,6 @@ export const QUERY_SUBJECTS = gql`
     subjects {
       _id
       name
-      skills
     }
   }
 `;

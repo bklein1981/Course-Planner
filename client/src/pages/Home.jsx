@@ -1,7 +1,9 @@
 import Subject from "../components/Subject";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
-
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries'
 function Home() {
     const [headerHeight, setHeaderHeight] = useState(0);
 
@@ -39,6 +41,22 @@ function Home() {
         boxSizing: 'border-box',
     };
 
+    const token = Auth.getProfile()
+
+    const userId = { userId: token.data._id }
+
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: userId,
+    });
+
+    const subjectData = data?.user.subjects;
+    const courses = data?.user.courses;
+    const projects = data?.user.projects;
+
+    if (loading) {
+        return <h2>LOADING...</h2>;
+    }
+
     return (
         <div className="flex justify-center">
             <div>
@@ -46,7 +64,12 @@ function Home() {
                     <Header />
                 </div>
                 <div id="main-content" style={mainStyle}>
-                    <Subject />
+                    {subjectData.map((subject, index) => {
+                        const subjectCardData = { subject, courses, projects }
+                        return (
+                            <Subject key={index} subjectData={subjectCardData} />
+                        )
+                    })}
                 </div>
             </div>
         </div>
