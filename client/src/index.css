@@ -53,8 +53,10 @@ body {
   padding: 0 0 8px
 }
 
-.home-div {
-  margin: 250px 0 0;
+
+
+.header-margin {
+  margin: 70px 0 0;
 }
 
 .subject-box {
@@ -73,6 +75,8 @@ body {
   transform: translateY(3px)
 }
 #edit-profile-btn {
+  margin: 25% 0;
+  height: 34px;
   color: #6B7280;
   box-shadow: 0px 3px 2px #46484D;
 }
@@ -135,6 +139,9 @@ body {
     display: none;
   }
 
+  .edit-profile {
+    display: none;
+  }
   .home-div {
     margin: 210px 0 0;
   }
