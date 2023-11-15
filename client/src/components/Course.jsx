@@ -13,7 +13,7 @@ function Course() {
   return (
     <Card className="max-w-sm">
       <div className="grid grid-cols-10">
-        <div className="col-span-9 text-2xl	font-bold">Introduction to Computer Science</div>
+        <div className="col-span-9 text-2xl	font-bold">placeholder</div>
         <div>
           <div className="pb-2">
             <EditCourse isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
@@ -24,11 +24,11 @@ function Course() {
       </div>
       <div className="grid grid-cols-6">
         <div className="col-span-2 text-lg font-medium text-gray-900">Start Date:</div>
-        <div className="col-span-2 text-lg font-medium text-gray-500">11/11/23</div>
+        <div className="col-span-2 text-lg font-medium text-gray-500">placeholder</div>
       </div>
       <div className="grid grid-cols-6">
         <div className="col-span-2 text-lg font-medium text-gray-900">End Date:</div>
-        <div className="col-span-2 text-lg font-medium text-gray-500">11/11/23</div>
+        <div className="col-span-2 text-lg font-medium text-gray-500">placeholder</div>
       </div>
     </Card>
 

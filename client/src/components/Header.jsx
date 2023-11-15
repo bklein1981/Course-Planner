@@ -33,10 +33,10 @@ function Header() {
               <div>Subjects</div>
             </div>
             <div className="col-span-9">
-              <div className="pb-2">John Doe</div>
-              <div className="pb-2">John Doe is a software engineer with 10 years of experience.</div>
-              <div className="pb-2">React, Node, Express, Postgres, Python, Django</div>
-              <div>Professional Development, Computer Science, Math</div>
+              <div className="pb-2">placeholder</div>
+              <div className="pb-2">placeholder</div>
+              <div className="pb-2">placeholder</div>
+              <div>placeholder</div>
             </div>
           </div>
         </div>
