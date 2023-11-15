@@ -21,7 +21,6 @@ function Home() {
       const loggedInUserId = Auth.getProfile()?.data?._id;
       if (loggedInUserId) {
         setUserId(loggedInUserId);
-        console.log(loggedInUserId)
       }
     }, []);
   
