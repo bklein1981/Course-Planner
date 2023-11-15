@@ -72,6 +72,16 @@ body {
   box-shadow: 0px 0px;
   transform: translateY(3px)
 }
+#edit-profile-btn {
+  color: #6B7280;
+  box-shadow: 0px 3px 2px #46484D;
+}
+
+#edit-profile-btn:active {
+  border: 1px solid;
+  box-shadow: 0px 0px;
+  transform: translateY(3px)
+}
 #edit-user-btn {
   color: #6B7280;
   box-shadow: 0px 3px 2px #46484D;
