@@ -2,7 +2,6 @@ import Auth from "./utils/auth.js";
 import { Outlet } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 
 
@@ -33,7 +32,6 @@ function App() {
     <ApolloProvider client={client}>
       <Outlet />
       <Footer />
-      {/* {Auth.loggedIn() ? <Home></Home> : <Login></Login>} */}
     </ApolloProvider>
   );
 }

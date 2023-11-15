@@ -1,4 +1,6 @@
 import Subject from "../components/Subject";
+import Header from "../components/Header";
+
 
 function Home() {
 
