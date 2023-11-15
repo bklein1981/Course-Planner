@@ -5,10 +5,10 @@ import { useState } from "react";
 
 import { useMutation } from '@apollo/client';
 
-function Subject(subjectsData) {
 
+function Subject(subjectsData) {
   const [openModal, setOpenModal] = useState(false);
-  console.log("SUBJECT user ",user)
+
   const handleClickEvent = () => {
     setOpenModal(true)
   }
@@ -29,7 +29,6 @@ function Subject(subjectsData) {
 
 
   return (
-
     <div className="pt-4 border-2 rounded px-5 pb-5 shadow-md mb-2 subject-box">
       <div className="grid grid-rows-1 pb-5 text-center text-5xl font-semibold">{subject.name}</div>
       <div className="grid grid-rows-1 pb-5 text-center text-lg font-semibold">{subject.description}</div>
