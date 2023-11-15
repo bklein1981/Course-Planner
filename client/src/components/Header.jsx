@@ -1,4 +1,5 @@
 import AddSubject from "./AddSubject";
+import EditUserProfile from "./EditUser";
 import { useEffect, useState } from "react";
 import Auth from "../utils/auth";
 import { QUERY_USER } from "../utils/queries";
@@ -53,10 +54,24 @@ function Header() {
   const skillsString = skillsArray.join(', ');
 
 
-  const[openModal, setOpenModal] = useState(false);
-  
-  const handleClickEvent = () => {
-    setOpenModal(true) }
+  const [addSubjectModalOpen, setAddSubjectModalOpen] = useState(false);
+  const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
+
+  const handleOpenAddSubjectModal = () => {
+    setAddSubjectModalOpen(true);
+  };
+
+  const handleCloseAddSubjectModal = () => {
+    setAddSubjectModalOpen(false);
+  };
+
+  const handleOpenEditProfileModal = () => {
+    setEditProfileModalOpen(true);
+  };
+
+  const handleCloseEditProfileModal = () => {
+    setEditProfileModalOpen(false);
+  };
 
     
   return (
@@ -85,9 +100,11 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="flex justify-center col-span-12 lg:col-span-1">
-          <AddSubject isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
-          <button className="my-10 px-4 border rounded" id="add-subject-btn" aria-label="add a subject" alt="Add a Subject" onClick={handleClickEvent}>Add a Subject</button>
+        <div className="flex flex-col space-y-4">
+          <AddSubject isOpen={addSubjectModalOpen} onCloseModal={handleCloseAddSubjectModal}/>
+          <button className="my-10 px-4 border rounded" id="add-subject-btn" aria-label="add a subject" alt="Add a Subject" onClick={handleOpenAddSubjectModal}>Add a Subject</button>
+          <EditUserProfile isOpen={editProfileModalOpen} onCloseModal={handleCloseEditProfileModal}  userData={user} />
+          <button className="my-10 px-4 border rounded" id="edit-profile-btn" aria-label="add a subject" alt="Add a Subject" onClick={handleOpenEditProfileModal}>Edit Profile</button>
         </div>
       </div>
     </div>
