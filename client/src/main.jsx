@@ -17,6 +17,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: Auth.loggedIn() ? <Home /> : <Login />
+        
       }
     ]
   }
