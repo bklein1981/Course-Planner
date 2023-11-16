@@ -43,11 +43,11 @@ function Subject(subjectsData) {
               <div key={index}>
                 <Course course={courseData} />
                
-                {/* {projectsArray.map((projectData, index) => {
+                {projectsArray.map((projectData, index) => {
                   return (
                     <Project courseId={courseId} key={index} projects={projectData} />
                   )
-                })} */}
+                })}
 
               </div>
             )

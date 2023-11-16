@@ -101,13 +101,14 @@ const resolvers = {
           course: courseRef._id,
           user: userRef._id,
         });
-  
+        console.log('here');
         // Update references in the  user
         userRef.projects.push(newProject._id);
   
         // Save changes to the database
         await userRef.save();
-  
+        
+        console.log('line114', userRef)
         return newProject;
       } catch (error) {
         throw new Error(`Error adding project: ${error.message}`);
@@ -225,11 +226,19 @@ const resolvers = {
         throw new Error(`Error removing course from user: ${error.message}`);
       }
     },
-    editCourse: async (parent, { courseId, name, description, startDate, endDate, projects }) => {
+    // editCourse: async (parent, { courseId, name, description, startDate, endDate, projects }) => {
+    //   const updatedCourse = await Course.findByIdAndUpdate(
+    //     { _id: courseId},
+    //     { name, description, startDate, endDate },
+    //     { $set: {projects} },
+    //     { new: true }
+    //     )
+    //     return updatedCourse
+    // },
+    editCourse: async (parent, { courseId, name, description, startDate, endDate}) => {
       const updatedCourse = await Course.findByIdAndUpdate(
         { _id: courseId},
         { name, description, startDate, endDate },
-        { $set: {projects} },
         { new: true }
         )
         return updatedCourse

@@ -1,21 +1,36 @@
 import { useState } from 'react';
 import EditProject from './EditProject';
-
-
+import { REMOVE_PROJECT } from '../utils/mutations'
+import { useMutation } from '@apollo/client';
 import editIcon from '../assets/images/edit_icon.svg';
 import deleteIcon from '../assets/images/delete_icon.svg';
 
 function Project(projectData) {
-
-
   const [openEditModal, setEditModal] = useState(false);
 
+  const [removeProject, { error }] = useMutation(REMOVE_PROJECT);
 
   const edithandleClickEvent = () => {
     setEditModal(true)
   }
 
   const project = projectData.projects;
+
+  const deleteProject = async () => {
+    try {
+      // const token = Auth.getProfile()
+      // const userId = token.data._id 
+      const projectId = project._id
+      console.log(projectId._id)
+
+      const response = await removeProject({
+        variables: {projectId: projectId}
+      });
+      console.log('response',response)
+    } catch (err) {
+      console.error(error);
+    }
+  }
 
   return (
 
@@ -28,7 +43,7 @@ function Project(projectData) {
                   <div className="col-span-9 truncate text-md font-medium text-gray-900 dark:text-white">{project.name}</div>
                   <EditProject isOpen={openEditModal} onCloseModal={() => setEditModal(false)} />
                   <button className='col-span-2 lg:justify-self-center' aria-label="edit" onClick={edithandleClickEvent}><img className='edit-button-img' src={editIcon} alt="edit button" /></button>
-                  <button aria-label="delete"><img className='delete-button-img' src={deleteIcon} alt="delete button" /></button>
+                  <button aria-label="delete"><img className='delete-button-img' src={deleteIcon} alt="delete button" onClick={deleteProject}/></button>
                 </div>
                 <div className="truncate text-sm text-gray-500 dark:text-gray-400">{project.description}</div>
               </div>

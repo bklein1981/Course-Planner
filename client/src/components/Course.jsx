@@ -56,7 +56,7 @@ function Course(courseData) {
           <div className="col-span-9 text-2xl	font-bold">{course.name}</div>
           <div>
             <div className="pb-2">
-              <EditCourse isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
+              <EditCourse courseId={course._id} isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
               <button id="edit-course-btn" aria-label="edit-course" onClick={editCourseHandleClickEvent}><img className="edit-subj-img" src={editIcon} alt="edit course" /></button>
             </div>
             <div><button id="del-course-btn" aria-label="delete-course"><img className="delete-subj-img" src={deleteIcon} alt="delete course" onClick={deleteCourse} /></button></div>
@@ -74,7 +74,7 @@ function Course(courseData) {
       <Card className="max-w-sm">
         <div className="flex items-center justify-between grid grid-cols-12">
           <h5 className="col-span-11 text-xl font-bold leading-none text-gray-900 dark:text-white">Current Projects</h5>
-          <AddProject isOpen={openAddModal} onCloseModal={() => setAddModal(false)} />
+          <AddProject courseId={course._id} isOpen={openAddModal} onCloseModal={() => setAddModal(false)} />
           <button className='col-span-1 justify-self-center' onClick={addhandleClickEvent}><img className='add-button' src={addIcon} aria-label="add project" alt="add project button" /></button>
         </div>
       </Card>
