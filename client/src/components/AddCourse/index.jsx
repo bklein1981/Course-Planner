@@ -1,10 +1,9 @@
 import { Label, TextInput, Button, Modal } from 'flowbite-react';
 import { useState, useEffect } from 'react';
 import Datepicker from "tailwind-datepicker-react"
-
+import Auth from '../../utils/auth';
 import { useQuery, useMutation } from '@apollo/client'; //
-import{ ADD_COURSE } from '../../utils/mutations' //
-import { QUERY_SUBJECTS } from '../../utils/queries' 
+import{ ADD_COURSE, ADD_COURSE_TO_USER } from '../../utils/mutations' //
 
 const options = {
   autoHide: true,
@@ -59,11 +58,6 @@ function AddCourse(props) {
     setOpenModal(props.isOpen);
   }, [props.isOpen]);
 
-  const { loading, data } = useQuery(QUERY_SUBJECTS);
-
-  console.log(data?.subjects);
-  const subjectArray = data?.subjects;
-  
   const handleChangeStartDate = (selectedDate) => {
     console.log("Start Date:", selectedDate);
     // Additional logic if needed
@@ -81,30 +75,43 @@ function AddCourse(props) {
     setcourseData({ ...courseData, [name]: value });
   };
 
-  const callBothFunction= () =>  {
-    handleInputChange();
-    onCloseModal();
+  const [addCourse] = useMutation(ADD_COURSE);
+  const [addCourseToUser, { error }] = useMutation(ADD_COURSE_TO_USER);
+
+  const addToUser = async (courseId) => {
+    const token = Auth.getProfile()
+    console.log(token)
+
+    const userId = token.data._id 
+
+    // console.log('courseid',CourseIdNum)
+
+    try {
+      const response = await addCourseToUser({
+        variables: {userId: userId, courseId: courseId}
+      });
+      console.log('adduser', response)
+    } catch (err) {
+      console.error(error);
+    }
   }
-
-
-  const [addCourse, { error }] = useMutation(ADD_COURSE);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    onCloseModal();
 
     try {
       const response = await addCourse({
         variables: courseData
       });
 
-      console.log(response)
+      const courseId = response.data.addCourse._id
+      console.log('addedCourse',response)
+
+      addToUser(courseId);
     } catch (err) {
       console.error(error);
     }
-  }
-
-  if (loading) {
-    return <h2>LOADING...</h2>;
   }
 
   return (
@@ -160,21 +167,9 @@ function AddCourse(props) {
                   </div>
                 </div>
                 <div>
-                  {/* <div className="mb-2 block">
-                    <Label htmlFor="end-date" value="Subject" />
-                  </div> */}
-                  {/* <div>
-                    <select name="subject" onChange={handleInputChange}>
-                      {subjectArray.map((subject, index)=>{
-                        return(
-                          <option key={index} value={subject._id}>{subject.name}</option>
-                        )
-                      })}
-                    </select>
-                </div> */}
                 </div>
 
-                  <Button type="submit" onClick={callBothFunction}>+ Add Course</Button>
+                  <Button type="submit">+ Add Course</Button>
               </form>
             </div>
           

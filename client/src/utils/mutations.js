@@ -61,12 +61,10 @@ export const ADD_PROJECT = gql`
 
 export const ADD_COURSE_TO_USER = gql`
   mutation addCourseToUser($userId: ID!, $courseId: ID!) {
-    addCourseToUser(userId: $userId, userId: $courseId) {
+    addCourseToUser(userId: $userId, courseId: $courseId) {
       _id
       courses {
         _id
-        name
-        description
       }
     }
   }
@@ -78,8 +76,6 @@ export const REMOVE_COURSE_FROM_USER = gql`
       _id
         courses{
           _id
-          name
-          description
         }
     }
   }
@@ -98,8 +94,8 @@ mutation addSubjectToUser($userId: ID!, $subjectId: ID!){
 `;
 
 export const REMOVE_SUBJECT_FROM_USER = gql`
-  mutation RemoveCourseFromUser($userId: ID!, $subjectId: ID!) {
-    removeCourseFromUser(userId: $userId, subjectId: $subjectId) {  
+  mutation removeSubjectFromUser($userId: ID!, $subjectId: ID!) {
+    removeSubjectFromUser(userId: $userId, subjectId: $subjectId) {  
       _id
       subjects {
         _id

@@ -3,22 +3,54 @@ import { useState } from "react";
 import editIcon from "../assets/images/edit_icon.svg";
 import deleteIcon from "../assets/images/delete_icon.svg";
 import EditCourse from "./EditCourse";
+
 import AddProject from './AddProject';
 import addIcon from '../assets/images/add_icon.svg';
+
+import { useMutation } from '@apollo/client';
+import { REMOVE_SUBJECT_FROM_USER, ADD_PROJECT, REMOVE_COURSE_FROM_USER } from '../utils/mutations'
+
+import Auth from '../utils/auth';
+
 
 function Course(courseData) {
   const [openModal, setOpenModal] = useState(false);
   const [openAddModal, setAddModal] = useState(false);
 
+  const [removeCourseFromUser, { error }] = useMutation(REMOVE_COURSE_FROM_USER);
 
-  const handleClickEvent = () => {
+
+  const editCourseHandleClickEvent = () => {
     setOpenModal(true)
   }
   const addhandleClickEvent = () => {
     setAddModal(true)
   }
 
+  const addProjectHandleClickEvent = () => {
+    setAddModal(true)
+  }
+
+  
+
+  const deleteCourse = async () => {
+    try {
+      const token = Auth.getProfile()
+      const userId = token.data._id 
+      const courseId = courseData.course._id
+      console.log('remove',{userId: userId, courseId: courseId})
+
+      const response = await removeCourseFromUser({
+        variables: {userId: userId, courseId: courseId}
+      });
+      console.log('response',response)
+    } catch (err) {
+      console.error(error);
+    }
+  }
+
   const course = courseData.course
+
  
   return (
     <div>
@@ -50,6 +82,7 @@ function Course(courseData) {
         </div>
       </Card>
     </div>
+
   );
 }
 
