@@ -2,6 +2,11 @@ import { Label, TextInput, Button, Modal, Checkbox } from 'flowbite-react';
 import { useState, useEffect } from 'react';
 import Datepicker from "tailwind-datepicker-react"
 
+import { useQuery, useMutation } from '@apollo/client';
+import { ADD_PROJECT } from '../../utils/mutations'
+import { QUERY_COURSES } from '../../utils/queries';
+import Auth from '../../utils/auth';
+
 const options = {
   autoHide: true,
   todayBtn: false,
@@ -41,9 +46,11 @@ const options = {
 }
 
 function AddProject(props) {
+  const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', endDate: '', isCompleted: false, course: props.courseId, user:''}); // set state for course input
   const [openModal, setOpenModal] = useState(props.isOpen);
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+
 
   function onCloseModal() {
     setOpenModal(false);
@@ -53,77 +60,118 @@ function AddProject(props) {
   useEffect(() => {
     setOpenModal(props.isOpen);
   }, [props.isOpen]);
-  
+
+  const { loading, data } = useQuery(QUERY_COURSES);
+
+
   const handleChangeStartDate = (selectedDate) => {
     console.log("Start Date:", selectedDate);
     // Additional logic if needed
+    setProjectData({ ...projectData, startDate: selectedDate })
   };
 
-	const handleChangeEndDate = (selectedDate) => {
+  const handleChangeEndDate = (selectedDate) => {
     console.log("End Date:", selectedDate);
     // Additional logic if needed
+    setProjectData({ ...projectData, endDate: selectedDate })
   };
 
-  return (
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setProjectData({ ...projectData, [name]: value });
+  };
 
-    <>
-      <Modal show={openModal} size="md" onClose={onCloseModal} popup>
-        <Modal.Header />
-        <Modal.Body>
-          <div className="space-y-6">
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white">Add a Project</h3>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="name" value="Project Name" />
-              </div>
-              <TextInput
-                id="name"
-                type='text'
-                placeholder="Project Name"
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="description" value="Project Description" />
-              </div>
-              <TextInput
-                id="description"
-                type='text'
-                placeholder="Project Description"
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="start-date" value="Start Date" />
-              </div>
-              <div>
-                <Datepicker classNames='cursor-pointer' id="start-date" options={options} onChange={handleChangeStartDate} show={showStartDatePicker} setShow={setShowStartDatePicker} />
-              </div>
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="end-date" value="End Date" />
-              </div>
-              <div>
-                <Datepicker id="end-date" options={options} onChange={handleChangeEndDate} show={showEndDatePicker} setShow={setShowEndDatePicker} />
-              </div>
-            </div>
-            <div>
-              <Checkbox id="completed" />
-              <Label className="pl-3" htmlFor="remember">is Completed</Label>
-            </div>
+  const [addProject, { error }] = useMutation(ADD_PROJECT);
 
-            <div className="w-full">
-              <Button onClick={onCloseModal}>+ Add Project</Button>
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    onCloseModal();
+    const token = Auth.getProfile()
+    const userId = token.data._id 
+    console.log('project submit', userId)
+    setProjectData({...projectData, user: userId})
+
+    try {
+      console.log("try handle form", projectData)
+      await addProject({
+        variables: projectData 
+      });
+      onCloseModal();
+
+    } catch (err) {
+      console.error(error);
+    };
+
+  }
+    if (loading) {
+      return <h2>LOADING...</h2>;
+    }
+
+    return (
+
+      <>
+        <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+          <Modal.Header />
+          <Modal.Body>
+            <div className="space-y-6">
+              <h3 className="text-xl font-medium text-gray-900 dark:text-white">Add a Project</h3>
+              <form onSubmit={handleFormSubmit}>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="name" value="Project Name" />
+                  </div>
+                  <TextInput
+                    id="name"
+                    type='text'
+                    placeholder="Project Name"
+                    name='name'
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="description" value="Project Description" />
+                  </div>
+                  <TextInput
+                    id="description"
+                    type='text'
+                    placeholder="Project Description"
+                    name='description'
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="start-date" value="Start Date" />
+                  </div>
+                  <div>
+                    <Datepicker classNames='cursor-pointer' id="start-date" options={options} onChange={handleChangeStartDate} show={showStartDatePicker} setShow={setShowStartDatePicker} />
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="end-date" value="End Date" />
+                  </div>
+                  <div>
+                    <Datepicker id="end-date" options={options} onChange={handleChangeEndDate} show={showEndDatePicker} setShow={setShowEndDatePicker} />
+                  </div>
+                </div>
+                <div>
+                  <Checkbox id="completed" />
+                  <Label className="pl-3" htmlFor="remember">is Completed</Label>
+                </div>
+
+                <div className="w-full pt-2">
+                  <Button type='submit'>+ Add Project</Button>
+                </div>
+              </form>
             </div>
+          </Modal.Body>
+        </Modal>
+      </>
+    );
+  }
 
-          </div>
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-}
-
-export default AddProject;
+  export default AddProject;
