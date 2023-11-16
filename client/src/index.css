@@ -53,10 +53,13 @@ body {
   padding: 0 0 8px
 }
 
-
-
 .header-margin {
   margin: 70px 0 0;
+}
+
+.main-style {
+  margin:300px 0 0;
+  padding: 20px 0 0;
 }
 
 .subject-box {
@@ -144,6 +147,11 @@ body {
   }
   .home-div {
     margin: 210px 0 0;
+  }
+
+  .main-style {
+    margin:200px 0 0;
+    padding: 20px 0 0;
   }
 
   .subject-box{
