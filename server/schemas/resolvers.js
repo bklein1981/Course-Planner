@@ -47,7 +47,6 @@ const resolvers = {
     //addUser
     addUser: async (parent, { email, password, first_name, last_name}) => {
       const user = await User.create({email, password, first_name, last_name })
-      console.log(user)
       const token = signToken(user)
       return { token, user };
     },
@@ -101,14 +100,12 @@ const resolvers = {
           course: courseRef._id,
           user: userRef._id,
         });
-        console.log('here');
         // Update references in the  user
         userRef.projects.push(newProject._id);
   
         // Save changes to the database
         await userRef.save();
         
-        console.log('line114', userRef)
         return newProject;
       } catch (error) {
         throw new Error(`Error adding project: ${error.message}`);
