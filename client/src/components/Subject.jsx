@@ -27,7 +27,6 @@ function Subject(subjectsData) {
     }
   }
 
-
   return (
     <div className="pt-4 border-2 rounded px-5 pb-5 shadow-md mb-2 subject-box">
       <div className="grid grid-rows-1 pb-5 text-center text-5xl font-semibold">{subject.name}</div>
@@ -56,7 +55,7 @@ function Subject(subjectsData) {
                 )
             })}
           <div>
-            <AddCourse isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
+            <AddCourse subjectId={subjectId} isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
             <button className="border-2 rounded" id="new-course-btn" onClick={handleClickEvent}>Add New Course</button>
           </div>
 

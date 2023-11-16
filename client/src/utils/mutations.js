@@ -42,9 +42,6 @@ export const ADD_COURSE = gql`
       startDate
       endDate
       isCompleted
-      subject {
-        name
-      }
     }
   }
 `;
