@@ -54,6 +54,7 @@ function Course(courseData) {
       <Card className="max-w-sm">
         <div className="grid grid-cols-10">
           <div className="col-span-9 text-2xl	font-bold">{course.name}</div>
+          <div className="col-span-9 text-xl	font-semibold">{course.description}</div>
           <div>
             <div className="pb-2">
               <EditCourse courseId={course._id} isOpen={openModal} onCloseModal={() => setOpenModal(false)} />

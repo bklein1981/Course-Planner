@@ -46,7 +46,10 @@ const options = {
 }
 
 function AddProject(props) {
-  const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', endDate: '', isCompleted: false, course: props.courseId, user:''}); // set state for course input
+  const token = Auth.getProfile()
+  const userId = token.data._id
+
+  const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', endDate: '', isCompleted: false, course: props.courseId, user:userId}); // set state for course input
   const [openModal, setOpenModal] = useState(props.isOpen);
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
@@ -84,12 +87,10 @@ function AddProject(props) {
   const [addProject, { error }] = useMutation(ADD_PROJECT);
 
   const handleFormSubmit = async (event) => {
-    const token = await Auth.getProfile()
-    const userId = token.data._id 
+    console.log(event.target.value)
     event.preventDefault();
-    onCloseModal();
-    console.log('project submit', userId)
-    setProjectData({...projectData, user: userId})
+    console.log(projectData)
+    
 
     try {
       console.log("try handle form", projectData)
@@ -97,7 +98,9 @@ function AddProject(props) {
         variables: projectData 
       });
 
-      console.log(response)
+      onCloseModal();
+
+      console.log('response',response)
     } catch (err) {
       console.error(error);
     };
@@ -115,7 +118,7 @@ function AddProject(props) {
           <Modal.Body>
             <div className="space-y-6">
               <h3 className="text-xl font-medium text-gray-900 dark:text-white">Add a Project</h3>
-              <form onSubmit={handleFormSubmit}>
+              <form>
                 <div>
                   <div className="mb-2 block">
                     <Label htmlFor="name" value="Project Name" />
@@ -164,7 +167,7 @@ function AddProject(props) {
                 </div>
 
                 <div className="w-full pt-2">
-                  <Button type='submit'>+ Add Project</Button>
+                  <Button type='submit' onClick={handleFormSubmit}>+ Add Project</Button>
                 </div>
               </form>
             </div>

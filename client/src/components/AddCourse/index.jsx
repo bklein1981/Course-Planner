@@ -123,7 +123,7 @@ function AddCourse(props) {
           
             <div className="space-y-6">
               <h3 className="text-xl font-medium text-gray-900 dark:text-white">Add a Course</h3>
-              <form onSubmit={handleFormSubmit}>
+              <form >
                 <div>
                   <div className="mb-2 block">
                     <Label htmlFor="Name" value="Name" />
@@ -169,7 +169,7 @@ function AddCourse(props) {
                 <div>
                 </div>
 
-                  <Button type="submit">+ Add Course</Button>
+                  <Button type="submit" onClick={handleFormSubmit}>+ Add Course</Button>
               </form>
             </div>
           
