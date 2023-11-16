@@ -8,6 +8,7 @@ import AddProject from './AddProject';
 import addIcon from '../assets/images/add_icon.svg';
 
 import { useMutation } from '@apollo/client';
+import { QUERY_USER } from "../utils/queries";
 import { REMOVE_SUBJECT_FROM_USER, ADD_PROJECT, REMOVE_COURSE_FROM_USER } from '../utils/mutations'
 
 import Auth from '../utils/auth';
@@ -19,6 +20,9 @@ function Course(courseData) {
 
   const [removeCourseFromUser, { error }] = useMutation(REMOVE_COURSE_FROM_USER);
 
+  const updateProjects = (newProject) => {
+    setProjects([...projects, newProject])
+  }
 
   const editCourseHandleClickEvent = () => {
     setOpenModal(true)
@@ -26,8 +30,6 @@ function Course(courseData) {
   const addhandleClickEvent = () => {
     setAddModal(true)
   }
-
-
   
 
   const deleteCourse = async () => {
@@ -47,7 +49,8 @@ function Course(courseData) {
   }
 
   const course = courseData.course
-
+  const courseStartDate = new Date(Number(course.startDate)).toLocaleDateString()
+  const courseEndDate = new Date(Number(course.endDate)).toLocaleDateString()
  
   return (
     <div>
@@ -65,17 +68,17 @@ function Course(courseData) {
         </div>
         <div className="grid grid-cols-6">
           <div className="col-span-2 text-lg font-medium text-gray-900">Start Date:</div>
-          <div className="col-span-2 text-lg font-medium text-gray-500">{!course.startDate ? "N/A" : course.startDate}</div>
+          <div className="col-span-2 text-lg font-medium text-gray-500">{!course.startDate ? "N/A" : courseStartDate}</div>
         </div>
         <div className="grid grid-cols-6">
           <div className="col-span-2 text-lg font-medium text-gray-900">End Date:</div>
-          <div className="col-span-2 text-lg font-medium text-gray-500">{!course.endDate ? "N/A" : course.endDate}</div>
+          <div className="col-span-2 text-lg font-medium text-gray-500">{!course.endDate ? "N/A" : courseEndDate}</div>
         </div>
       </Card>
       <Card className="max-w-sm">
         <div className="flex items-center justify-between grid grid-cols-12">
           <h5 className="col-span-11 text-xl font-bold leading-none text-gray-900 dark:text-white">Current Projects</h5>
-          <AddProject courseId={course._id} isOpen={openAddModal} onCloseModal={() => setAddModal(false)} />
+          <AddProject courseId={course._id} isOpen={openAddModal} onCloseModal={() => setAddModal(false)} updateProjects={updateProjects} />
           <button className='col-span-1 justify-self-center' onClick={addhandleClickEvent}><img className='add-button' src={addIcon} aria-label="add project" alt="add project button" /></button>
         </div>
       </Card>

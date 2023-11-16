@@ -19,7 +19,6 @@ function Header() {
     const loggedInUserId = Auth.getProfile()?.data?._id;
     if (loggedInUserId) {
       setUserId(loggedInUserId);
-      console.log(loggedInUserId)
 
     }
   }, []);
@@ -34,9 +33,7 @@ function Header() {
 
   useEffect(() => {
     if (userId && data) {
-      console.log("User Data:", data);
       const userData = data.user || {};
-      console.log("User:", userData); // Log the user object
       setUserData(userData); // Set the user data in state
     }
   }, [loading, data]);

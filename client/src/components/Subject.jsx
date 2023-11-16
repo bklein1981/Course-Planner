@@ -1,3 +1,4 @@
+import { Card } from "flowbite-react";
 import Course from "./Course";
 import Project from "./Project";
 import AddCourse from "./AddCourse";
@@ -45,9 +46,10 @@ function Subject(subjectsData) {
                
                 {projectsArray.map((projectData, index) => {
                   return (
-                    <Project courseId={courseId} key={index} projects={projectData} />
-                  )
-                })}
+                    <Card className="max-w-sm">
+                    <Project courseId={courseId} key={index} projects={projectData} /></Card>
+                    )
+                  })}
 
               </div>
             )
