@@ -67,12 +67,10 @@ export const ADD_PROJECT = gql`
 
 export const ADD_COURSE_TO_USER = gql`
   mutation addCourseToUser($userId: ID!, $courseId: ID!) {
-    addCourseToUser(userId: $userId, userId: $courseId) {
+    addCourseToUser(userId: $userId, courseId: $courseId) {
       _id
       courses {
         _id
-        name
-        description
       }
     }
   }
