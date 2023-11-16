@@ -27,9 +27,6 @@ function Course(courseData) {
     setAddModal(true)
   }
 
-  const addProjectHandleClickEvent = () => {
-    setAddModal(true)
-  }
 
   
 
@@ -60,9 +57,9 @@ function Course(courseData) {
           <div>
             <div className="pb-2">
               <EditCourse isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
-              <button id="edit-course-btn" aria-label="edit-course" onClick={handleClickEvent}><img className="edit-subj-img" src={editIcon} alt="edit course" /></button>
+              <button id="edit-course-btn" aria-label="edit-course" onClick={editCourseHandleClickEvent}><img className="edit-subj-img" src={editIcon} alt="edit course" /></button>
             </div>
-            <div><button id="del-course-btn" aria-label="delete-course"><img className="delete-subj-img" src={deleteIcon} alt="delete course" /></button></div>
+            <div><button id="del-course-btn" aria-label="delete-course"><img className="delete-subj-img" src={deleteIcon} alt="delete course" onClick={deleteCourse} /></button></div>
           </div>
         </div>
         <div className="grid grid-cols-6">
