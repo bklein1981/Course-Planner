@@ -112,7 +112,7 @@ function Header() {
           </div>
         </div>
         <div className="grid justify-items-center">
-          <AddSubject isOpen={addSubjectModalOpen} onCloseModal={handleCloseAddSubjectModal} />
+          <AddSubject isOpen={addSubjectModalOpen} onCloseModal={handleCloseAddSubjectModal} userData={user} />
           <button className="px-4 py-1 mb-2 border rounded" id="add-subject-btn" aria-label="add a subject" alt="Add a Subject" onClick={handleOpenAddSubjectModal}>Add a Subject</button>
         </div>
       </div>

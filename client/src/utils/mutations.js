@@ -98,7 +98,6 @@ mutation addSubjectToUser($userId: ID!, $subjectId: ID!){
     email
     subjects {
       _id
-      name
     }
   }
 }

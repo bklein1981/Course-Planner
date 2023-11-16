@@ -50,8 +50,6 @@ function AddCourse(props) {
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
 
-  console.log('porps',props)
-
   function onCloseModal() {
     setOpenModal(false);
     props.onCloseModal();
