@@ -55,12 +55,6 @@ export const ADD_PROJECT = gql`
       startDate
       endDate
       isCompleted
-      course{
-        id
-      }
-      user{
-        id
-      }
     }
   }
 `;

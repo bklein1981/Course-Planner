@@ -44,9 +44,8 @@ function Subject(subjectsData) {
                   <Course course={courseData} />
                   {projectsArray.map((projectData, index) =>{
                     return(
-                      <Project key={index} projects={projectData} />
+                      <Project courseId={courseId} key={index} projects={projectData} />
                     )
-                    
                   })}
                   
                 </div>
