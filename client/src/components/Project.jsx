@@ -12,7 +12,9 @@ function Project(projectData) {
 
   const edithandleClickEvent = () => {
     setEditModal(true)
+    console.log('openEditModal', openEditModal)
   }
+
 
   const project = projectData.projects;
 
@@ -44,7 +46,7 @@ function Project(projectData) {
               <div className="min-w-0 flex-1">
                 <div className='grid grid-cols-12'>
                   <div className="col-span-9 truncate text-md font-bold text-gray-900 dark:text-white">{project.name}</div>
-                  <EditProject isOpen={openEditModal} onCloseModal={() => setEditModal(false)} />
+                  <EditProject projectId={project._id} isOpen={openEditModal} onCloseModal={() => setEditModal(false)} />
                   <button className='col-span-2 lg:justify-self-center' aria-label="edit" onClick={edithandleClickEvent}><img className='edit-button-img' src={editIcon} alt="edit button" /></button>
                   <button aria-label="delete"><img className='delete-button-img' src={deleteIcon} alt="delete button" onClick={deleteProject}/></button>
                 </div>
