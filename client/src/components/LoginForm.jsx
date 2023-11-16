@@ -48,7 +48,7 @@ function LoginForm({changePage}) {
     {/* <!-- Password Input --> */}
     <div className="mb-4">
       <label htmlFor="password" className="block text-gray-600">Password</label>
-      <input type="password" placeholder='Your email' name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" onChange={handleInputChange} autoComplete="off"/>
+      <input type="password" placeholder='Your password' name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" onChange={handleInputChange} autoComplete="off"/>
     </div>
     {/* <!-- Login Button --> */}
     {(userFormData.email && userFormData.password) ? 
