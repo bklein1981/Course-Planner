@@ -54,14 +54,14 @@ function Course(courseData) {
       <Card className="max-w-sm">
         <div className="grid grid-cols-10">
           <div className="col-span-9 text-2xl	font-bold">{course.name}</div>
-          <div className="col-span-9 text-xl	font-semibold">{course.description}</div>
-          <div>
+          <div className="pl-2">
             <div className="pb-2">
               <EditCourse courseId={course._id} isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
               <button id="edit-course-btn" aria-label="edit-course" onClick={editCourseHandleClickEvent}><img className="edit-subj-img" src={editIcon} alt="edit course" /></button>
             </div>
             <div><button id="del-course-btn" aria-label="delete-course"><img className="delete-subj-img" src={deleteIcon} alt="delete course" onClick={deleteCourse} /></button></div>
           </div>
+          <div className="col-span-9 text-lg text-gray-500">{course.description}</div>     
         </div>
         <div className="grid grid-cols-6">
           <div className="col-span-2 text-lg font-medium text-gray-900">Start Date:</div>
