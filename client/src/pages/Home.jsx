@@ -60,6 +60,19 @@ function Home() {
         return <h2>LOADING...</h2>;
     }
 
+    if (!subjectData || subjectData.length === 0) {
+        return (
+            <div>
+                <Header />
+                <div id="main-content" style={mainStyle}>
+                    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-5 p-5 border border-blue-500">
+                        <p className="text-center text-lg font-semibold text-gray-700">Please click on "add a subject" to add a subject and begin using the planner.</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="flex justify-center">
             <div>
