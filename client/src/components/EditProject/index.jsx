@@ -2,6 +2,9 @@ import { Label, TextInput, Button, Modal, Checkbox } from 'flowbite-react';
 import { useState, useEffect } from 'react';
 import Datepicker from "tailwind-datepicker-react"
 
+import { useMutation } from '@apollo/client';
+import { EDIT_PROJECT } from '../../utils/mutations'
+
 const options = {
   autoHide: true,
   todayBtn: false,
@@ -41,6 +44,8 @@ const options = {
 }
 
 function EditProject(props) {
+  const projectId = props.projectId
+  const [projectData, setProjectData] = useState({ name: '', description: '', startDate: '', endDate: '', projectId: projectId });
   const [openModal, setOpenModal] = useState(props.isOpen);
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
@@ -57,12 +62,36 @@ function EditProject(props) {
   const handleChangeStartDate = (selectedDate) => {
     console.log("Start Date:", selectedDate);
     // Additional logic if needed
+    setProjectData({ ...projectData, startDate: selectedDate });
   };
 
 	const handleChangeEndDate = (selectedDate) => {
     console.log("End Date:", selectedDate);
     // Additional logic if needed
+    setProjectData({ ...projectData, endDate: selectedDate });
   };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setProjectData({ ...projectData, [name]: value });
+  }
+
+  const [editProject, { error }] = useMutation(EDIT_PROJECT);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    onCloseModal();
+
+    console.log('projectData', projectData);
+    try {
+      const response = await editProject({
+        variables: projectData
+    });
+    console.log('editedCourse', response)
+  }catch (err) {
+    console.error(error);
+  }
+}
 
   return (
 
@@ -70,6 +99,7 @@ function EditProject(props) {
       <Modal show={openModal} size="md" onClose={onCloseModal} popup>
         <Modal.Header />
         <Modal.Body>
+          <form onSubmit={handleFormSubmit}>
           <div className="space-y-6">
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">Edit Project Details</h3>
             <div>
@@ -79,7 +109,9 @@ function EditProject(props) {
               <TextInput
                 id="name"
                 type='text'
+                name="name"
                 placeholder="Project Name"
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -91,6 +123,8 @@ function EditProject(props) {
                 id="description"
                 type='text'
                 placeholder="Project Description"
+                name="description"
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -116,14 +150,16 @@ function EditProject(props) {
             </div>
 
             <div className="w-full">
-              <Button onClick={onCloseModal}>Submit Changes</Button>
+              <Button type="submit" onClick={handleFormSubmit}>Submit Changes</Button>
             </div>
 
           </div>
+          </form>
         </Modal.Body>
       </Modal>
     </>
   );
-}
+  }
+
 
 export default EditProject;

@@ -118,6 +118,19 @@ export const EDIT_COURSE = gql`
   }
 `;
 
+export const EDIT_PROJECT = gql`
+  mutation EditProject($projectId: ID!, $name: String!, $description: String!, $startDate: String, $endDate: String, $isCompleted: Boolean) {
+    editProject(projectId: $projectId, name: $name, description: $description, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted) {
+      _id
+      name
+      description
+      startDate
+      endDate
+      isCompleted
+    }
+  }
+`;
+
 export const EDIT_PROFILE = gql`
   mutation EditProfile($userId: ID!, $first_name: String, $last_name: String, $biography: String, $skills: [String], $links: [String]) {
     editProfile(userId: $userId, first_name: $first_name, last_name: $last_name, biography: $biography, skills: $skills, links: $links) {
