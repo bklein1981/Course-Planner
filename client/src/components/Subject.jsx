@@ -31,26 +31,27 @@ function Subject(subjectsData) {
       <div className="grid grid-rows-1 pb-5 text-center text-lg font-semibold">{subject.description}</div>
       <div className="grid grid-rows-1">
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-2">
-        {coursesArray.map((courseData, index) => {
-              const courseId = courseData._id
-              let projectsArray = [];
-                for (let i = 0; i < projects.length; i++) {
-                  if (projects[i].course._id === courseId) {
-                    projectsArray.push(projects[i])
-                  }
-                }
-                return(
-                <div key={index}>  
-                  <Course course={courseData} />
-                  {projectsArray.map((projectData, index) =>{
-                    return(
-                      <Project courseId={courseId} key={index} projects={projectData} />
-                    )
-                  })}
-                  
-                </div>
-                )
-            })}
+          {coursesArray.map((courseData, index) => {
+            const courseId = courseData._id
+            let projectsArray = [];
+            for (let i = 0; i < projects.length; i++) {
+              if (projects[i].course._id === courseId) {
+                projectsArray.push(projects[i])
+              }
+            }
+            return (
+              <div key={index}>
+                <Course course={courseData} />
+               
+                {/* {projectsArray.map((projectData, index) => {
+                  return (
+                    <Project courseId={courseId} key={index} projects={projectData} />
+                  )
+                })} */}
+
+              </div>
+            )
+          })}
           <div>
             <AddCourse subjectId={subjectId} isOpen={openModal} onCloseModal={() => setOpenModal(false)} />
             <button className="border-2 rounded" id="new-course-btn" onClick={handleClickEvent}>Add New Course</button>
