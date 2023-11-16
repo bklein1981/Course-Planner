@@ -3,15 +3,25 @@ import { useState } from "react";
 import editIcon from "../assets/images/edit_icon.svg";
 import deleteIcon from "../assets/images/delete_icon.svg";
 import EditCourse from "./EditCourse";
+import { useMutation } from '@apollo/client';
+import{ REMOVE_SUBJECT_FROM_USER } from '../utils/mutations'
 
 function Course(courseData) {
   const [openModal, setOpenModal] = useState(false);
+
+  const [RemoveCourseFromUser, { error }] = useMutation(REMOVE_SUBJECT_FROM_USER);
 
   const handleClickEvent = () => {
     setOpenModal(true)
   }
 
+  const deleteCourse = () => {
+    
+  }
+
   const course = courseData.course
+
+  
 
   return (
     <Card className="max-w-sm">
