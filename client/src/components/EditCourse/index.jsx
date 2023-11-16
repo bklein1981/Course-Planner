@@ -2,6 +2,9 @@ import { Label, TextInput, Button, Modal } from 'flowbite-react';
 import { useState, useEffect } from 'react';
 import Datepicker from "tailwind-datepicker-react"
 
+import { useMutation } from '@apollo/client';
+import{ EDIT_COURSE } from '../../utils/mutations'
+
 const options = {
   autoHide: true,
   todayBtn: false,
@@ -63,6 +66,8 @@ function EditCourse(props) {
     console.log("End Date:", selectedDate);
     // Additional logic if needed
   };
+
+  const [addCourse, { error }] = useMutation(EDIT_COURSE);
 
   return (
 

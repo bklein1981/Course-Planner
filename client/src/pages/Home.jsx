@@ -52,6 +52,9 @@ function Home() {
     const subjectData = data?.user.subjects;
     const courses = data?.user.courses;
     const projects = data?.user.projects;
+    console.log("SUBJECT DATA", subjectData)
+    console.log("COURSES", courses)
+    console.log("PROJECTS", projects)
 
     if (loading) {
         return <h2>LOADING...</h2>;
