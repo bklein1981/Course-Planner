@@ -58,6 +58,7 @@ function AddProject(props) {
   function onCloseModal() {
     setOpenModal(false);
     props.onCloseModal();
+    window.location.reload()
   }
 
   useEffect(() => {

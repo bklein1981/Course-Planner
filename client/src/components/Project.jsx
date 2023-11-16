@@ -29,6 +29,7 @@ function Project(projectData) {
         variables: {projectId: projectId}
       });
       console.log('response',response)
+      window.location.reload()
     } catch (err) {
       console.error(error);
     }
