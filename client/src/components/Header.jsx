@@ -73,7 +73,7 @@ function Header() {
     setEditProfileModalOpen(false);
   };
 
-
+  console.log("YJTEST",user.biography)
   return (
     <div>
       <div className="flex flex-row flex-wrap pb-4 bg-slate-200 pt-4 ">
@@ -83,12 +83,13 @@ function Header() {
         </div>
       </div>
       <div className="shadow bio-div">
+      {user.biography ? (
         <div className="grid grid-cols-6 row">
           <div className="col-span-5 bio-list">
             <table className="table-auto">
               <tbody>
                 <tr>
-                <td className="inline-block align-top pr-5">Name:</td>
+                  <td className="inline-block align-top pr-5">Name:</td>
                   <td>{user.first_name + " " + user.last_name}</td>
                 </tr>
                 <tr>
@@ -96,11 +97,11 @@ function Header() {
                   <td>{user.biography}</td>
                 </tr>
                 <tr>
-                <td className="inline-block align-top pr-5">Skills:</td>
+                  <td className="inline-block align-top pr-5">Skills:</td>
                   <td>{skillsString}</td>
                 </tr>
                 <tr>
-                <td className="inline-block align-top pr-5">Subjects:</td>
+                  <td className="inline-block align-top pr-5">Subjects:</td>
                   <td>{subjectsString}</td>
                 </tr>
               </tbody>
@@ -111,8 +112,20 @@ function Header() {
             <button className="px-4 py-1 border rounded" id="edit-profile-btn" aria-label="edit profile" alt="Edit Profile" onClick={handleOpenEditProfileModal}>Edit Profile</button>
           </div>
         </div>
+      ) : (
+        <div id="main-content" className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-5 p-5 border border-blue-500 mb-4">
+        <p className="text-center text-lg font-semibold text-gray-700">Please click on "Edit Profile" to fill out your Profile, {user.first_name}!</p>
+        <div className="flex items-center justify-center mt-5">
+          
+          <div className="flex">
+            <EditUserProfile isOpen={editProfileModalOpen} onCloseModal={handleCloseEditProfileModal} userData={user} />
+            <button className="px-4 py-1 border rounded ml-3" id="edit-profile-btn" aria-label="edit profile" alt="Edit Profile" onClick={handleOpenEditProfileModal}>Edit Profile</button>
+          </div>
+        </div>
+      </div>
+      )}
         <div className="grid justify-items-center">
-          <AddSubject isOpen={addSubjectModalOpen} onCloseModal={handleCloseAddSubjectModal} />
+          <AddSubject isOpen={addSubjectModalOpen} onCloseModal={handleCloseAddSubjectModal} userData={user} />
           <button className="px-4 py-1 mb-2 border rounded" id="add-subject-btn" aria-label="add a subject" alt="Add a Subject" onClick={handleOpenAddSubjectModal}>Add a Subject</button>
         </div>
       </div>
