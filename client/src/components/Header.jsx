@@ -73,7 +73,6 @@ function Header() {
     setEditProfileModalOpen(false);
   };
 
-  console.log("YJTEST",user.biography)
   return (
     <div>
       <div className="flex flex-row flex-wrap pb-4 bg-slate-200 pt-4 ">
