@@ -29,6 +29,7 @@ export const QUERY_USER = gql`
             }
         }
         projects {
+            _id
             name
             description
             startDate

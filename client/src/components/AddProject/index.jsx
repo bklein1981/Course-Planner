@@ -84,20 +84,20 @@ function AddProject(props) {
   const [addProject, { error }] = useMutation(ADD_PROJECT);
 
   const handleFormSubmit = async (event) => {
+    const token = await Auth.getProfile()
+    const userId = token.data._id 
     event.preventDefault();
     onCloseModal();
-    const token = Auth.getProfile()
-    const userId = token.data._id 
     console.log('project submit', userId)
     setProjectData({...projectData, user: userId})
 
     try {
       console.log("try handle form", projectData)
-      await addProject({
+      const response = await addProject({
         variables: projectData 
       });
-      onCloseModal();
 
+      console.log(response)
     } catch (err) {
       console.error(error);
     };

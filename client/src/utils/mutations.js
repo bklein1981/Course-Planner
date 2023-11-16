@@ -106,17 +106,14 @@ export const REMOVE_SUBJECT_FROM_USER = gql`
 `;
 
 export const EDIT_COURSE = gql`
-  mutation EditCourse($courseId: ID!, $name: String!, $description: String!, $startDate: String, $endDate: String, $isCompleted: Boolean, $subject: ID!) {
-    editCourse(courseId: $courseId, name: $name, description: $description, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted, subject: $subject) {
+  mutation EditCourse($courseId: ID!, $name: String!, $description: String!, $startDate: String, $endDate: String, $isCompleted: Boolean) {
+    editCourse(courseId: $courseId, name: $name, description: $description, startDate: $startDate, endDate: $endDate, isCompleted: $isCompleted) {
       _id
       name
       description
       startDate
       endDate
       isCompleted
-      subject {
-        name
-      }
     }
   }
 `;

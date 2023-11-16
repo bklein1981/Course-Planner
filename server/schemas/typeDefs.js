@@ -66,7 +66,7 @@ type Mutation {
   removeCourseFromUser(userId: ID! courseId: ID!): User
   addSubjectToUser(userId: ID!, subjectId: ID!): User
   removeSubjectFromUser(userId: ID!, subjectId: ID!): User
-  editCourse(courseId: ID!, name: String!, description: String!, startDate: String, endDate: String, projects: [ID]): Course
+  editCourse(courseId: ID!, name: String!, description: String!, startDate: String, endDate: String,isCompleted: Boolean, projects: [ID]): Course
   editProject(projectId: ID!, name: String!, description: String!, startDate: String, endDate: String, isCompleted: Boolean): Project
   removeCourse(courseId: ID!): Course 
   removeProject(projectId: ID!): Project
