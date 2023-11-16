@@ -68,13 +68,11 @@ function AddProject(props) {
 
 
   const handleChangeStartDate = (selectedDate) => {
-    console.log("Start Date:", selectedDate);
     // Additional logic if needed
     setProjectData({ ...projectData, startDate: selectedDate })
   };
 
   const handleChangeEndDate = (selectedDate) => {
-    console.log("End Date:", selectedDate);
     // Additional logic if needed
     setProjectData({ ...projectData, endDate: selectedDate })
   };
@@ -87,20 +85,14 @@ function AddProject(props) {
   const [addProject, { error }] = useMutation(ADD_PROJECT);
 
   const handleFormSubmit = async (event) => {
-    console.log(event.target.value)
     event.preventDefault();
-    console.log(projectData)
-    
-
     try {
-      console.log("try handle form", projectData)
       const response = await addProject({
         variables: projectData 
       });
 
+      
       onCloseModal();
-
-      console.log('response',response)
     } catch (err) {
       console.error(error);
     };
