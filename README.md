@@ -1,7 +1,7 @@
 # Self Guided Learning: Course Planner
 
 ## Screenshot
-![Portfolio Screen Shot](./client/public/booksearchss.PNG)
+![Portfolio Screen Shot](./client/src/assets/images/screenshot.png)
 
 
 ## Description
