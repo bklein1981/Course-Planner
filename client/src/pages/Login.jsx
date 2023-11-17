@@ -1,6 +1,8 @@
 import { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
+import logo from "../assets/images/logo.png";
+
 function Login() {
   const [userFormData, setUserFormData] = useState("home");
   const [page, setPage] = useState("home");
@@ -14,14 +16,13 @@ function Login() {
     setPage(newValue);
  }
 
-
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* <!-- Left: Image --> */}
       <div className="w-1/2 h-screen hidden lg:block">
         <img
-          src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat"
-          alt="Placeholder Image"
+          src={logo}
+          alt="A white and green journal"
           className="object-cover w-full h-full"
         />
       </div>
